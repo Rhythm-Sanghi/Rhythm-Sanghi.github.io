@@ -1,0 +1,639 @@
+<!-- Firebase JS SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<!-- Use compat libraries for direct script tag usage -->
+
+<script>
+  // Firebase config and initialization is now handled inside the module script below.
+</script>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio & Blog | A Digital Cosmos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide-react@latest/dist/lucide-react.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #020617;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        #background-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .frosted-glass {
+            background-color: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        .glass-card {
+             background-color: rgba(15, 23, 42, 0.5);
+             backdrop-filter: blur(12px);
+             -webkit-backdrop-filter: blur(12px);
+             border: 1px solid rgba(51, 65, 85, 0.5);
+             transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+        }
+        .glass-card:hover {
+            background-color: rgba(30, 41, 59, 0.7);
+            border-color: rgba(71, 85, 105, 0.7);
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-on-scroll { opacity: 0; }
+        .animated { animation: fadeInUp 1s ease-out forwards; }
+        .prose { color: #cbd5e1; }
+        .prose h1, .prose h2, .prose h3 { color: #f1f5f9; }
+        .prose a { color: #5eead4; }
+        .invert-colors { filter: invert(1); }
+        @keyframes glitch-anim {
+            0% { transform: translate(0); text-shadow: 1px 1px #5eead4, -1px -1px #f43f5e; }
+            25% { transform: translate(-3px, 3px); text-shadow: -1px 1px #5eead4, 1px -1px #f43f5e; }
+            50% { transform: translate(3px, -3px); text-shadow: 1px -1px #5eead4, -1px 1px #f43f5e; }
+            75% { transform: translate(-3px, 3px); text-shadow: -1px 1px #5eead4, 1px -1px #f43f5e; }
+            100% { transform: translate(0); text-shadow: 1px 1px #5eead4, -1px -1px #f43f5e; }
+        }
+        .glitching {
+            animation: glitch-anim 0.3s cubic-bezier(.25, .46, .45, .94) both 2;
+        }
+        #typewriter-h1::after {
+            content: '▋';
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+        #terminal-container {
+            transform: translateY(-100%);
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        #terminal-container.open { transform: translateY(0); }
+        #terminal-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            width: 100%;
+            color: #e2e8f0;
+        }
+        #terminal-output pre { 
+            white-space: pre-wrap; 
+            font-family: monospace;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -21px; top: 0;
+            width: 1rem; height: 1rem;
+            background-color: #1e293b;
+            border: 3px solid #5eead4;
+            border-radius: 50%;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="background-canvas"></canvas>
+
+    <div id="terminal-container" class="fixed top-0 left-0 w-full h-1/2 md:h-2/3 bg-slate-900/80 backdrop-blur-md z-50 shadow-2xl rounded-b-lg">
+        <div class="w-full h-full max-w-6xl mx-auto p-4 flex flex-col">
+            <div class="flex-shrink-0 text-xs text-slate-400 mb-2">[CosmicFolio v1.0] - Press '~' to close. Type 'help' for commands.</div>
+            <div id="terminal-output" class="flex-grow overflow-y-auto font-mono text-sm"></div>
+            <div class="flex-shrink-0 flex items-center font-mono text-sm mt-2">
+                <span class="text-teal-400">user@cosmicfolio:~$</span>
+                <input type="text" id="terminal-input" class="pl-2" autofocus />
+            </div>
+        </div>
+    </div>
+    
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 frosted-glass">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center max-w-6xl">
+            <a href="#" id="logo" class="text-2xl font-bold tracking-tight nav-link text-white" data-view="home">CosmicFolio.</a>
+            <nav class="hidden md:flex items-center space-x-8 text-slate-300 font-medium">
+                <a href="#about" class="hover:text-teal-300 transition-colors nav-link" data-view="home" data-scroll-to="about">About</a>
+                <a href="#projects" class="hover:text-teal-300 transition-colors nav-link" data-view="home" data-scroll-to="projects">Projects</a>
+                <a href="#" class="hover:text-teal-300 transition-colors nav-link" data-view="blogList">Blog</a>
+                <a href="#contact" class="bg-teal-400 text-slate-900 px-4 py-2 rounded-full hover:bg-teal-300 transition-colors shadow-lg shadow-teal-500/10 font-semibold nav-link" data-view="home" data-scroll-to="contact">Contact</a>
+            </nav>
+            <button id="mobile-menu-btn" class="md:hidden text-slate-300">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h4"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="main-content" class="pt-24 relative z-10"></main>
+    
+    <footer id="contact" class="bg-transparent text-slate-400 mt-24 relative z-10">
+        <div class="container mx-auto px-6 py-12 text-center max-w-6xl border-t border-slate-800">
+             <h2 class="text-3xl font-bold text-white mb-4 cursor-pointer">Let's Connect</h2>
+             <p class="max-w-xl mx-auto mb-8">I'm currently looking for new opportunities. Feel free to reach out via email or connect with me on social media.</p>
+             <div class="flex justify-center space-x-6">
+                <a href="mailto:hello@example.com" class="text-slate-300 hover:text-teal-300 transition-colors">hello@example.com</a>
+                <a href="#" class="text-slate-300 hover:text-teal-300 transition-colors">LinkedIn</a>
+                <a href="#" class="text-slate-300 hover:text-teal-300 transition-colors">GitHub</a>
+             </div>
+             <div class="mt-12 pt-8 border-t border-slate-800/50 flex justify-center items-center gap-4 text-xs">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                <div class="text-left">
+                    <p class="text-slate-400">Now Playing (Demo)</p>
+                    <p class="font-bold text-white">Lo-Fi Hip Hop Radio - Beats to Relax/Study to</p>
+                </div>
+             </div>
+        </div>
+    </footer>
+    
+    <button id="anim-toggle" class="fixed bottom-4 right-4 z-50 p-2 rounded-full bg-slate-800/50 text-slate-300 hover:bg-slate-700/70 backdrop-blur-sm transition"></button>
+
+    <script type="module">
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyAcFFC97rqKO_7jBm9kYeZmJxI40xA2e3c",
+  authDomain: "portfoliowebsite-b472e.firebaseapp.com",
+  projectId: "portfoliowebsite-b472e",
+  storageBucket: "portfoliowebsite-b472e.firebasestorage.app",
+  messagingSenderId: "494231883513",
+  appId: "1:494231883513:web:e22a155e405ced37515c28",
+  measurementId: "G-9Q63BJPQ9Q"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+/* const analytics = getAnalytics(app); // Disabled: not available in CDN SDK */
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, onSnapshot, doc, getDoc, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        console.log(`%c...booting CosmicFolio OS... \n...secret transmission received. \nHint: Press '~' to open the terminal.`, "font-family: monospace; color: #5eead4;");
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+        
+        let db, auth, currentView = 'home', posts = [], projects = [], githubRepos = [], currentPostId = null;
+        let animationFrameId, isMatrixVisible = true;
+
+        const mainContent = document.getElementById('main-content');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const canvas = document.getElementById('background-canvas');
+        const ctx = canvas.getContext('2d');
+        const terminalContainer = document.getElementById('terminal-container');
+        const terminalOutput = document.getElementById('terminal-output');
+        const terminalInput = document.getElementById('terminal-input');
+        const animToggleButton = document.getElementById('anim-toggle');
+        
+        let columns, drops;
+        const matrixChars = "PYTHON-AWS-DOCKER-KUBERNETES-API-JSON-CLOUD-SERVERLESS-01";
+        const fontSize = 16;
+        function initMatrixRain() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            columns = canvas.width / fontSize;
+            drops = [];
+            for (let x = 0; x < columns; x++) drops[x] = 1;
+        }
+        function drawMatrix() {
+            if (!isMatrixVisible) return;
+            ctx.fillStyle = "rgba(2, 6, 23, 0.04)"; 
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#5eead4";
+            ctx.font = fontSize + "px monospace";
+            for (let i = 0; i < drops.length; i++) {
+                const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+            animationFrameId = requestAnimationFrame(drawMatrix);
+        }
+        
+        function toggleMatrixVisibility() {
+            isMatrixVisible = !isMatrixVisible;
+            if(isMatrixVisible) {
+                canvas.style.opacity = '1';
+                drawMatrix();
+                animToggleButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>`;
+            } else {
+                cancelAnimationFrame(animationFrameId);
+                canvas.style.opacity = '0';
+                setTimeout(() => {
+                    if (!isMatrixVisible) ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }, 500);
+                animToggleButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>`;
+            }
+        }
+        animToggleButton.addEventListener('click', toggleMatrixVisibility);
+
+        function toggleTerminal() {
+            terminalContainer.classList.toggle('open');
+            if (terminalContainer.classList.contains('open')) terminalInput.focus();
+        }
+        terminalInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const command = e.target.value.trim();
+                handleCommand(command);
+                e.target.value = '';
+            }
+        });
+        function printToTerminal(text, isCommand = false) {
+            if(isCommand) {
+                terminalOutput.innerHTML += `<div><span class="text-teal-400">user@cosmicfolio:~$</span> <span class="text-white">${escapeHTML(text)}</span></div>`;
+            } else {
+                 terminalOutput.innerHTML += `<div><pre>${text}</pre></div>`;
+            }
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        }
+        function handleCommand(cmd) {
+            printToTerminal(cmd, true);
+            const [command, ...args] = cmd.toLowerCase().split(' ');
+            switch(command) {
+                case 'help':
+                    printToTerminal(`Available commands:\n  <span class="text-teal-400">help</span>      - Show this list\n  <span class="text-teal-400">nav</span>       - Navigate to a section (e.g., 'nav projects')\n  <span class="text-teal-400">ls</span>        - List available sections\n  <span class="text-teal-400">cat</span>       - View content (e.g., 'cat blog/latest')\n  <span class="text-teal-400">clear</span>     - Clear the terminal screen\n  <span class="text-teal-400">date</span>      - Display current date and time\n  <span class="text-teal-400">cosmic</span>    - Display the system signature`);
+                    break;
+                case 'ls':
+                    printToTerminal('about  projects  blog  contact');
+                    break;
+                case 'nav':
+                    if (args[0]) {
+                        const targetElement = document.getElementById(args[0]);
+                        if(targetElement) {
+                             targetElement.scrollIntoView({ behavior: 'smooth' });
+                             printToTerminal(`Navigating to ${args[0]}...`);
+                             toggleTerminal();
+                        } else {
+                             printToTerminal(`Error: Section '${args[0]}' not found.`);
+                        }
+                    } else {
+                        printToTerminal("Usage: nav &lt;section_name&gt;");
+                    }
+                    break;
+                case 'cat':
+                    if (args[0] === 'blog/latest' && posts.length > 0) {
+                        printToTerminal(`Title: ${escapeHTML(posts[0].title)}`);
+                    } else {
+                        printToTerminal("Nothing to show. Try 'cat blog/latest'");
+                    }
+                    break;
+                case 'clear':
+                    terminalOutput.innerHTML = '';
+                    break;
+                case 'date':
+                    printToTerminal(new Date().toLocaleString());
+                    break;
+                case 'cosmic':
+                    const asciiArt = `
+ CCCCC   OOOOO   SSSSS  M     M  IIIIIII   CCCCC  
+C     C O     O S     S MM   MM     I     C     C 
+C       O     O S       M M M M     I     C       
+C       O     O  SSSSS  M  M  M     I     C       
+C       O     O       S M     M     I     C       
+C     C O     O S     S M     M     I     C     C 
+ CCCCC   OOOOO   SSSSS  M     M  IIIIIII   CCCCC  
+`;
+                    printToTerminal(`<span class="text-teal-400">${escapeHTML(asciiArt)}</span>`);
+                    break;
+                default:
+                    printToTerminal(`Command not found: ${command}. Type 'help' for a list of commands.`);
+            }
+        }
+
+        function activateMatrixColorShift() {
+            console.log("Konami code activated! Color shift engaged.");
+            let originalColor = "#5eead4";
+            let shiftedColor = "#f43f5e";
+            ctx.fillStyle = shiftedColor;
+            setTimeout(() => {
+                 ctx.fillStyle = originalColor;
+                 console.log("Color shift disengaged.");
+            }, 2500);
+        }
+        document.addEventListener('keydown', e => {
+            if (terminalContainer.classList.contains('open') && e.key === 'Escape') {
+                 toggleTerminal();
+            } else if (e.key === '`' || e.key === '~') { 
+                if (!e.target.matches('input, textarea')) {
+                    e.preventDefault(); 
+                    toggleTerminal(); 
+                }
+            }
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) { activateMatrixColorShift(); konamiIndex = 0; }
+            } else { konamiIndex = 0; }
+        });
+        let logoClicks = 0;
+        document.getElementById('logo').addEventListener('click', () => {
+            logoClicks++;
+            if (logoClicks >= 7) {
+                document.body.classList.toggle('invert-colors');
+                logoClicks = 0;
+            }
+        });
+        
+        function setupEasterEggListeners() {
+            const footerHeading = document.querySelector('#contact h2');
+            if (footerHeading) {
+                let footerClicks = 0;
+                footerHeading.addEventListener('click', () => {
+                    footerClicks++;
+                    if (footerClicks >= 7) {
+                        document.body.classList.add('glitching');
+                        setTimeout(() => {
+                            document.body.classList.remove('glitching');
+                        }, 600);
+                        footerClicks = 0;
+                    }
+                });
+            }
+        }
+
+        const GITHUB_USERNAME = "Rhythm-Sanghi";
+        async function fetchGitHubData() {
+            try {
+                const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=pushed&per_page=6`);
+                if(!res.ok) throw new Error('Network response was not ok');
+                githubRepos = await res.json();
+                render();
+            } catch (error) {
+                console.error("Failed to fetch GitHub data:", error);
+            }
+        }
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-portfolio-app';
+        // Firebase config is now set above
+        
+        async function initialize() {
+            initMatrixRain();
+            
+            isMatrixVisible = true;
+            animToggleButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>`;
+            drawMatrix();
+
+            window.addEventListener('resize', () => {
+                cancelAnimationFrame(animationFrameId);
+                initMatrixRain();
+                if (isMatrixVisible) {
+                    drawMatrix();
+                }
+            });
+
+            fetchGitHubData();
+            
+            if (!firebaseConfig) {
+                mainContent.innerHTML = `<div class="text-center text-red-400 bg-red-900/50 p-4 rounded-lg container mx-auto">Firebase config is missing.</div>`;
+                return;
+            }
+            try {
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                onAuthStateChanged(auth, user => { if (user) setupListeners(); });
+                const token = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+                if (token) { await signInWithCustomToken(auth, token); } 
+                else { await signInAnonymously(auth); }
+            } catch (error) {
+                console.error("Firebase Init Error:", error);
+            }
+        }
+        
+        function setupListeners() {
+            onSnapshot(collection(db, `/blogs`), (snapshot) => {
+                posts = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                posts.sort((a, b) => (b.createdAt?.toMillis() || 0) - (a.createdAt?.toMillis() || 0));
+                console.log("Fetched blogs:", posts);
+                render();
+            });
+            onSnapshot(collection(db, `/projects`), (snapshot) => {
+                projects = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                console.log("Fetched projects:", projects);
+                render();
+            });
+        }
+        
+        function setupIntersectionObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+        }
+
+        function render() {
+            const currentScroll = window.scrollY;
+            const view = currentView;
+            
+            if(view === 'home') {
+                renderHomePage();
+            } else {
+                 mainContent.innerHTML = '';
+                 switch (view) {
+                    case 'blogList': renderBlogListPage(); break;
+                    case 'blogSingle': renderSinglePostPage(); break;
+                    default: renderHomePage();
+                }
+            }
+            
+            setupIntersectionObserver();
+            setupEasterEggListeners();
+            
+            if (view === 'home') {
+                 const h1 = document.getElementById('typewriter-h1');
+                 if(h1) typeWriter(h1, "Digital Architect & Data Streamer");
+                 window.scrollTo(0, currentScroll);
+            } else {
+                 window.scrollTo(0,0);
+            }
+        }
+        
+        function typeWriter(element, text, speed = 100) {
+            let i = 0; element.innerHTML = "";
+            function type() { if (i < text.length) { element.innerHTML += text.charAt(i); i++; setTimeout(type, speed); } }
+            type();
+        }
+
+        function renderHomePage() {
+            mainContent.innerHTML = `
+                <section class="container mx-auto px-6 py-24 md:py-40 text-center max-w-4xl">
+                    <div class="animate-on-scroll">
+                        <h1 id="typewriter-h1" class="text-5xl md:text-7xl font-extrabold tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-br from-white to-slate-400 h-24 md:h-36"></h1>
+                        <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto">I craft immersive web experiences that merge technology with artistry, exploring the frontiers of digital interaction. Press '~' to open the command line.</p>
+                    </div>
+                </section>
+                
+                <section id="about" class="container mx-auto px-6 py-16 max-w-4xl">
+                    <div class="animate-on-scroll text-center mb-12">
+                         <h2 class="text-4xl font-bold tracking-tight text-white">My Journey</h2>
+                         <p class="text-slate-400 mt-2">An interactive professional timeline.</p>
+                    </div>
+                    <div class="relative border-l-2 border-slate-800 ml-5 pl-10 space-y-12">
+                        ${renderTimelineItem({ year: '2024 - 2028', title: 'Bachelor of Technology in Computer Science', desc: 'Currently pursuing an engineering degree at Swami Vivekanand College of Engineering.'})}
+                        ${renderTimelineItem({ year: '2024', title: 'Completed 12th Grade', desc: 'Graduated with 88%.'})}
+                        ${renderTimelineItem({ year: '2022', title: 'Completed 10th Grade', desc: 'Graduated with 97%.'})}
+                    </div>
+                </section>
+
+                <section id="github" class="container mx-auto px-6 py-16 max-w-6xl">
+                     <div class="animate-on-scroll text-center mb-12">
+                         <h2 class="text-4xl font-bold tracking-tight text-white">Latest on GitHub</h2>
+                         <p class="text-slate-400 mt-2">A live feed of my recent repository activity.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        ${githubRepos.length > 0 ? githubRepos.map(repo => renderRepoCard(repo)).join('') : '<p class="text-center md:col-span-2 lg:col-span-3">Fetching latest transmissions from GitHub...</p>'}
+                    </div>
+                </section>
+
+                <section id="projects" class="container mx-auto px-6 py-16 max-w-6xl">
+                     <div class="animate-on-scroll text-center mb-12">
+                         <h2 class="text-4xl font-bold tracking-tight text-white">My Projects</h2>
+                         <p class="text-slate-400 mt-2">Constellations of code and creativity.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        ${projects.map(p => renderProjectCard(p)).join('') || '<p class="text-center md:col-span-2">Awaiting new transmissions... Projects will appear here.</p>'}
+                    </div>
+                </section>
+                <section id="blog" class="container mx-auto px-6 py-16 max-w-6xl">
+                    <div class="animate-on-scroll text-center mb-12">
+                         <h2 class="text-4xl font-bold tracking-tight text-white">Cosmic Log</h2>
+                         <p class="text-slate-400 mt-2">Dispatches from the digital void.</p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        ${posts.slice(0, 3).map(p => renderPostCard(p)).join('') || '<p class="text-center md:col-span-3">No log entries yet.</p>'}
+                    </div>
+                     ${posts.length > 3 ? `<div class="text-center mt-12"><button class="bg-slate-800 text-white px-6 py-3 rounded-full hover:bg-slate-700 transition-colors shadow-sm font-medium nav-link" data-view="blogList">Explore All Logs</button></div>` : ''}
+                </section>
+            `;
+        }
+
+        function renderTimelineItem({ year, title, desc }) {
+            return `
+                <div class="timeline-item animate-on-scroll">
+                    <p class="text-sm text-slate-400 mb-1">${year}</p>
+                    <h3 class="text-xl font-bold text-white">${escapeHTML(title)}</h3>
+                    <p class="text-slate-300 mt-1">${escapeHTML(desc)}</p>
+                </div>
+            `;
+        }
+        
+        function renderRepoCard(repo) {
+             return `
+                <div class="glass-card p-5 rounded-lg flex flex-col justify-between animate-on-scroll transform hover:-translate-y-1">
+                    <div>
+                        <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="text-lg font-bold text-white hover:text-teal-300 transition">${escapeHTML(repo.name)}</a>
+                        <p class="text-sm text-slate-400 mt-2 h-12 overflow-hidden">${repo.description ? escapeHTML(repo.description) : 'No description provided.'}</p>
+                    </div>
+                    <div class="flex items-center text-xs text-slate-400 mt-4">
+                        <span class="w-3 h-3 rounded-full mr-1.5" style="background-color: ${repo.language ? '#5eead4' : '#475569'};"></span>
+                        <span>${repo.language || 'N/A'}</span>
+                        <span class="ml-auto">⭐ ${repo.stargazers_count}</span>
+                    </div>
+                </div>
+             `;
+        }
+        
+        function renderBlogListPage() {
+            mainContent.innerHTML = `
+                <section class="container mx-auto px-6 py-16 max-w-4xl">
+                    <div class="text-center mb-12 animate-on-scroll">
+                         <h1 class="text-5xl font-extrabold tracking-tighter text-white">The Cosmic Log</h1>
+                         <p class="text-slate-400 mt-2">All my dispatches, theories, and explorations.</p>
+                    </div>
+                    <div class="space-y-8">
+                        ${posts.map(post => `
+                            <div class="glass-card p-6 rounded-lg cursor-pointer post-link animate-on-scroll" data-post-id="${post.id}">
+                                <p class="text-slate-400 text-sm mb-2">${post.createdAt ? new Date(post.createdAt.toMillis()).toLocaleDateString() : ''}</p>
+                                <h2 class="text-3xl font-bold text-white mb-3">${escapeHTML(post.title)}</h2>
+                                <p class="text-slate-300 mb-4">${truncate(escapeHTML(post.content), 200)}</p>
+                                <a class="text-teal-400 font-semibold hover:underline">Continue Reading →</a>
+                            </div>
+                        `).join('') || '<p class="text-center">No log entries yet.</p>'}
+                    </div>
+                </section>
+            `;
+        }
+
+        function renderSinglePostPage() {
+            const post = posts.find(p => p.id === currentPostId);
+            if (!post) { currentView = 'blogList'; render(); return; }
+            const formattedContent = escapeHTML(post.content).replace(/\n/g, '<br>');
+            mainContent.innerHTML = `
+                <article class="container mx-auto px-6 py-16 max-w-3xl animate-on-scroll">
+                    <button class="mb-8 text-slate-300 font-semibold hover:text-white nav-link" data-view="blogList">← Back to Logs</button>
+                    <h1 class="text-5xl font-extrabold tracking-tighter mb-4 text-white">${escapeHTML(post.title)}</h1>
+                    <p class="text-slate-400 mb-8">Published on ${post.createdAt ? new Date(post.createdAt.toMillis()).toLocaleString() : ''}</p>
+                    <div class="prose max-w-none text-lg">${formattedContent}</div>
+                </article>
+            `;
+        }
+
+        function renderProjectCard(project) {
+            return `
+                <div class="glass-card p-6 rounded-2xl transform hover:-translate-y-1 animate-on-scroll">
+                    <img src="${project.imageUrl || 'https://placehold.co/600x400/0f172a/334155?text=Project'}" alt="${escapeHTML(project.title)}" class="rounded-lg mb-4 w-full h-48 object-cover border border-slate-700">
+                    <h3 class="text-xl font-bold mb-2 text-white">${escapeHTML(project.title)}</h3>
+                    <p class="text-slate-400 mb-4">${escapeHTML(project.description)}</p>
+                    <div class="flex space-x-4">
+                        <a href="${project.liveUrl || '#'}" target="_blank" class="text-teal-400 font-semibold hover:underline">Live Demo</a>
+                        <a href="${project.repoUrl || '#'}" target="_blank" class="text-slate-400 font-semibold hover:underline">GitHub</a>
+                    </div>
+                </div>`;
+        }
+
+        function renderPostCard(post) {
+            return `
+                <div class="glass-card p-6 rounded-2xl transform hover:-translate-y-1 animate-on-scroll cursor-pointer post-link" data-post-id="${post.id}">
+                    <h3 class="text-xl font-bold mb-2 text-white">${escapeHTML(post.title)}</h3>
+                    <p class="text-slate-400 mb-4 text-sm">${truncate(escapeHTML(post.content), 100)}</p>
+                    <div class="text-xs text-slate-500">${post.createdAt ? new Date(post.createdAt.toMillis()).toLocaleDateString() : ''}</div>
+                </div>`;
+        }
+        
+        const escapeHTML = str => str ? String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' })[m]) : '';
+        const truncate = (str, len) => (str && str.length > len) ? str.substring(0, len) + '...' : str;
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const view = link.dataset.view;
+                const scrollTo = link.dataset.scrollTo;
+
+                if (view && view !== currentView) {
+                    currentView = view;
+                    render();
+                }
+                
+                if (view === 'home' && scrollTo) {
+                     setTimeout(() => {
+                        document.getElementById(scrollTo)?.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                }
+            });
+        });
+        
+        document.body.addEventListener('click', e => {
+             const postLink = e.target.closest('.post-link');
+             if (postLink) {
+                 e.preventDefault();
+                 currentPostId = postLink.dataset.postId;
+                 currentView = 'blogSingle';
+                 render();
+             }
+        });
+        
+        document.addEventListener('DOMContentLoaded', initialize);
+    </script>
+</body>
+</html>
+
