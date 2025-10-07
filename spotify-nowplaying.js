@@ -1,4 +1,3 @@
-// Requires: npm install express axios dotenv
 
 require('dotenv').config();
 const express = require('express');
@@ -6,10 +5,6 @@ const axios = require('axios');
 const app = express();
 const PORT = 3000;
 
-// Set your Spotify credentials in a .env file
-// SPOTIFY_CLIENT_ID=your_client_id
-// SPOTIFY_CLIENT_SECRET=your_client_secret
-// SPOTIFY_REFRESH_TOKEN=your_refresh_token
 
 async function getAccessToken() {
   const response = await axios.post(
