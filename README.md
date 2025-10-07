@@ -1,6 +1,6 @@
 # Rhythm Sanghi Portfolio & Blog
 
-Hi, I'm Rhythm Sanghi! Welcome to my digital cosmos—a space where I showcase my journey, creativity, and the achievements of my family. This project is more than a portfolio; it's a living story, blending technology, design, and personal branding.
+Hi, I'm Rhythm Sanghi! Welcome to my digital cosmos—a space where I showcase my journey, creativity, and the achievements. This project is more than a portfolio; it's a living story, blending technology, design, and personal branding.
 
 ## What You'll Find Here
 
