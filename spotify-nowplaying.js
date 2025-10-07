@@ -45,6 +45,7 @@ app.get('/nowplaying', async (req, res) => {
     );
     res.json(response.data);
   } catch (error) {
+    console.error("Spotify API error:", error?.response?.data || error.message || error);
     res.status(500).json({ error: 'Could not fetch now playing.' });
   }
 });
