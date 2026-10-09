@@ -1,51 +1,44 @@
-# Rhythm Sanghi Portfolio & Blog
+# Rhythm Sanghi — portfolio and blog
 
-Hi, I'm Rhythm Sanghi! Welcome to my digital cosmos—a space where I showcase my journey, creativity, and the achievements. This project is more than a portfolio; it's a living story, blending technology, design, and personal branding.
+My portfolio, project list and blog. The page includes a browser terminal,
+animated backgrounds and Firebase-backed content.
 
-## What You'll Find Here
+## Preview the site
 
-- **My Projects:** Explore my work, skills, and creative experiments.
-- **Cosmic Log (Blog):** Dive into my thoughts, updates, and stories.
-- **Matrix Animation:** Watch my name, Sumit Sanghi, and Neeta Sanghi animate in a cosmic pattern.
-- **Live Data:** Projects and blogs update in real-time from Firebase.
-- **Terminal Fun:** Navigate my site with a built-in command line.
-- **Spotify Integration:** (Premium required) See what I'm listening to right now.
-- **GitHub Feed:** Track my latest coding activity.
+```sh
+git clone https://github.com/Rhythm-Sanghi/Rhythm-Sanghi.github.io.git
+cd Rhythm-Sanghi.github.io
+python -m http.server 8080
+```
 
-## Tech Stack
+Open http://localhost:8080. The page loads hosted styles, fonts and Firebase
+modules, so those features need an internet connection. The Firebase browser
+configuration is in `index.html`; use your own project when adapting the site.
+Browser configuration is public, so access rules must be configured in Firebase.
 
-- HTML, Tailwind CSS
-- JavaScript (ES Modules)
-- Firebase (Firestore, Auth)
-- Node.js, Express, Axios, Dotenv
+## Optional Spotify service
 
-## How to Use
+`spotify-nowplaying.js` is a separate Express service. GitHub Pages serves static
+files and does not run this Node server.
 
-1. Clone my repo:
-   ```
-   git clone https://github.com/your-username/your-repo.git
-   ```
-2. Install backend dependencies:
-   ```
-   npm install express axios dotenv
-   ```
-3. Add your Firebase config and Spotify credentials to `.env`.
-4. Start the backend:
-   ```
-   node spotify-nowplaying.js
-   ```
-5. Open `index.html` in your browser and explore!
+```sh
+npm ci
+npm start
+```
 
-## Customizing
+Create a local `.env` with your own Spotify application's `SPOTIFY_CLIENT_ID`,
+`SPOTIFY_CLIENT_SECRET`, and `SPOTIFY_REFRESH_TOKEN`. Do not commit credentials.
+The service exposes `GET http://localhost:3000/nowplaying`. Connecting it to a
+hosted page requires a separately deployed service and the appropriate frontend
+request/origin configuration; starting it does not wire it into the page.
 
-- Change names, links, and content in `index.html`.
-- Update matrix animation names in the script.
-- Add new projects and blogs in Firebase.
+## Editing
 
-## About Me
-
-I'm Rhythm Sanghi, passionate about technology, design, and sharing my digital journey. This site is my canvas—thanks for visiting!
+- Update page content, links, animation names and terminal behavior in `index.html`.
+- Configure Firebase content and access rules for your own deployment.
+- Keep dependency versions in `package.json` and `package-lock.json`; install
+  locally rather than committing `node_modules`.
 
 ## License
 
-MIT
+MIT. Dependency licenses remain with their respective packages.

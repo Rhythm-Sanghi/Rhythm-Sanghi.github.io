@@ -1,14 +1,14 @@
 {
   "name": "portfolio",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Personal portfolio and blog with a separate Spotify now-playing service.",
+  "main": "spotify-nowplaying.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node spotify-nowplaying.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Rhythm Sanghi",
+  "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
