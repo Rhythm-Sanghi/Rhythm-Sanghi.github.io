@@ -167,15 +167,6 @@ main:focus {
 .text-link:hover {
   border-color: var(--green);
 }
-.text-button {
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  padding: 0;
-  font-size: 13px;
-  text-decoration: underline;
-  text-underline-offset: 5px;
-}
 .eyebrow {
   font-family: var(--mono);
   font-size: 11px;
@@ -974,7 +965,10 @@ figcaption .mono {
     border-bottom: 1px solid var(--border);
     z-index: 15;
     overflow: auto;
-    scrollbar-width: thin;
+    scrollbar-width: none;
+  }
+  .rail::-webkit-scrollbar {
+    display: none;
   }
   .rail-label,
   .rail-bottom {
@@ -1109,9 +1103,6 @@ figcaption .mono {
     flex-direction: column;
     gap: 12px;
   }
-  .row-tech {
-    display: none;
-  }
   .project-row {
     padding-block: 18px;
   }
@@ -1188,7 +1179,7 @@ figcaption .mono {
     padding-bottom: 10px;
   }
   h1 {
-    font-size: 92px;
+    font-size: clamp(68px, 23vw, 92px);
   }
   .intro-copy {
     max-width: 340px;
@@ -1285,19 +1276,6 @@ figcaption .mono {
   }
   .social-links {
     gap: 28px;
-  }
-}
-@media (max-width: 900px) {
-  .rail {
-    scrollbar-width: none;
-  }
-  .rail::-webkit-scrollbar {
-    display: none;
-  }
-}
-@media (max-width: 540px) {
-  h1 {
-    font-size: clamp(68px, 23vw, 92px);
   }
 }
 @media (prefers-reduced-motion: reduce) {

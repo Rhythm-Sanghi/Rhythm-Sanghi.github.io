@@ -1,19 +1,10 @@
 {
   "name": "portfolio",
-  "version": "1.0.0",
-  "description": "Rhythm Sanghi\u2019s static portfolio, with Threadmark and Benchlight project notes.",
-  "main": "spotify-nowplaying.js",
+  "private": true,
+  "description": "Rhythm Sanghi's personal portfolio.",
   "scripts": {
-    "start": "node spotify-nowplaying.js",
     "dev": "node scripts/serve.cjs",
-    "check": "node --check src/theme.js && node --check src/app.js && node --check scripts/serve.cjs && node --check spotify-nowplaying.js"
+    "check": "node --check src/theme.js && node --check src/app.js && node --check scripts/serve.cjs"
   },
-  "keywords": [],
-  "author": "Rhythm Sanghi",
-  "license": "MIT",
-  "dependencies": {
-    "axios": "^1.12.2",
-    "dotenv": "^17.2.3",
-    "express": "^5.1.0"
-  }
+  "author": "Rhythm Sanghi"
 }
