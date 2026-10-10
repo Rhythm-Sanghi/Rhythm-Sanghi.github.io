@@ -1,51 +1,39 @@
-# Rhythm Sanghi Portfolio & Blog
+# Rhythm Sanghi
 
-Hi, I'm Rhythm Sanghi! Welcome to my digital cosmos—a space where I showcase my journey, creativity, and the achievements. This project is more than a portfolio; it's a living story, blending technology, design, and personal branding.
+My portfolio at [rhythm-sanghi.github.io](https://rhythm-sanghi.github.io/).
 
-## What You'll Find Here
+Plain HTML, CSS and JavaScript. No build step, third-party packages or external fonts.
 
-- **My Projects:** Explore my work, skills, and creative experiments.
-- **Cosmic Log (Blog):** Dive into my thoughts, updates, and stories.
-- **Matrix Animation:** Watch my name, Sumit Sanghi, and Neeta Sanghi animate in a cosmic pattern.
-- **Live Data:** Projects and blogs update in real-time from Firebase.
-- **Terminal Fun:** Navigate my site with a built-in command line.
-- **Spotify Integration:** (Premium required) See what I'm listening to right now.
-- **GitHub Feed:** Track my latest coding activity.
+## Local preview
 
-## Tech Stack
+With Node.js 20 or later:
 
-- HTML, Tailwind CSS
-- JavaScript (ES Modules)
-- Firebase (Firestore, Auth)
-- Node.js, Express, Axios, Dotenv
+```sh
+npm run dev
+```
 
-## How to Use
+Open http://127.0.0.1:8089. There is nothing to install. Set `PORT` to use another port.
 
-1. Clone my repo:
-   ```
-   git clone https://github.com/your-username/your-repo.git
-   ```
-2. Install backend dependencies:
-   ```
-   npm install express axios dotenv
-   ```
-3. Add your Firebase config and Spotify credentials to `.env`.
-4. Start the backend:
-   ```
-   node spotify-nowplaying.js
-   ```
-5. Open `index.html` in your browser and explore!
+## Files
 
-## Customizing
+- `index.html` — projects, notes, biography and contact details.
+- `src/styles.css` — layout, responsive rules and light/dark themes.
+- `src/theme.js` — applies the saved theme before the page renders.
+- `src/app.js` — navigation highlight, project filters and email copying.
+- `assets/` — portfolio mark, project logos, screenshots and sharing image.
+- `scripts/serve.cjs` — local preview server.
+- `robots.txt`, `sitemap.xml`, `.nojekyll` — GitHub Pages metadata.
 
-- Change names, links, and content in `index.html`.
-- Update matrix animation names in the script.
-- Add new projects and blogs in Firebase.
+The Threadmark and Benchlight screenshots come from their repositories' `docs/screenshots` folders. Project notes link directly to the corresponding documentation.
 
-## About Me
+## Checks
 
-I'm Rhythm Sanghi, passionate about technology, design, and sharing my digital journey. This site is my canvas—thanks for visiting!
+```sh
+npm run check
+```
 
-## License
+This checks JavaScript syntax. For interface changes, preview narrow and wide screens, toggle both themes, and try the filters, project details and keyboard navigation.
 
-MIT
+## Publishing
+
+GitHub Pages serves the repository root directly. Commit the source files and assets; no generated output is needed.
