@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f4f1" />
+    <meta
+      name="description"
+      content="Build notes by Rhythm Sanghi: reusing a parse is only part of a refresh."
+    />
+    <title>Reusing a parse is only part of a refresh — Rhythm Sanghi</title>
+    <link
+      rel="canonical"
+      href="https://rhythm-sanghi.github.io/notes/measuring-refresh/"
+    />
+    <meta
+      property="og:title"
+      content="Reusing a parse is only part of a refresh — Rhythm Sanghi"
+    />
+    <meta
+      property="og:description"
+      content="Build notes by Rhythm Sanghi: reusing a parse is only part of a refresh."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://rhythm-sanghi.github.io/notes/measuring-refresh/"
+    />
+    <meta
+      property="og:image"
+      content="https://rhythm-sanghi.github.io/assets/social.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Rhythm Sanghi — desktop tools, experiments, and notes"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/assets/mark.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/touch-icon.png" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <link rel="stylesheet" href="/src/pages.css" />
+    <script src="/src/theme.js"></script>
+    <script type="module" src="/src/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="identity" href="/" aria-label="Rhythm Sanghi, home"
+        ><svg class="personal-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M7 25V7h8a6 6 0 0 1 0 12H7m8 0 10 6M19 7h6" /></svg
+        ><span>Rhythm Sanghi</span></a
+      >
+      <span class="header-path">personal / portfolio</span>
+      <div class="header-actions">
+        <button
+          id="theme-toggle"
+          class="quiet-button"
+          hidden
+          aria-label="Switch to dark theme"
+        >
+          <span aria-hidden="true">◐</span
+          ><span id="theme-label">Dark</span></button
+        ><a class="header-github" href="/#contact"
+          >Contact <span aria-hidden="true">↗</span></a
+        >
+      </div>
+    </header>
+    <main id="main" class="document-page note-page" tabindex="-1">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Portfolio</a><span aria-hidden="true">/</span
+        ><span>Reusing a parse is only part of a refresh</span>
+      </nav>
+      <header class="document-hero">
+        <p class="eyebrow">Threadmark / Performance</p>
+        <h1>Reusing a parse is only part of a refresh</h1>
+        <p class="note-date">
+          Written from the current project documentation ·
+          <time datetime="2026-10-10">10 October 2026</time>
+        </p>
+      </header>
+      <article class="prose">
+        <p>
+          Incremental indexing sounds like a simple promise: change one file,
+          parse one file, finish quickly. The missing part is everything that
+          follows parsing.
+        </p>
+        <h2>Look at the whole operation</h2>
+        <p>
+          Threadmark reuses unchanged per-file parses. Whole-graph resolution
+          and JSON snapshot persistence still run during a refresh, however. The
+          cache saves syntax work without removing the rest of the pipeline.
+        </p>
+        <p>
+          On the documented 10,000-file / 100,000-function fixture, v0.1.1
+          measured a 7.40-second new index, 3.52-second unchanged refresh and
+          4.60-second one-file update. Peak process working set reached 731 MiB.
+          A warm, bounded graph query does not summarize those costs.
+        </p>
+        <h2>One improvement can expose the next cost</h2>
+        <p>
+          Version 0.1.1 avoids repeated symbol scans, moves reusable parsed
+          files rather than cloning them, and skips writes for unchanged cache
+          entries. It also uses a small revision table to invalidate cached
+          graphs across database connections.
+        </p>
+        <p>
+          The same-host fixture improved unchanged refresh by about 43% against
+          the documented v0.1.0 run. Query timings were slower in the newer run.
+          Reporting both is more useful than keeping only the favourable number.
+        </p>
+        <h2>Write down the boundary of the measurement</h2>
+        <p>
+          These are single-run generated TypeScript fixtures with ten functions
+          per file and no imports. The host was Windows 11 x64, an Intel Core
+          i7-1365U with 16 GB RAM, using a Rust 1.98.1 release build. Filesystem
+          caches were not flushed. A new Threadmark database is not a cold
+          physical disk.
+        </p>
+        <p>
+          The next structural work is affected-subgraph resolution and more
+          efficient persistence. Repeating a tiny warm query would not answer
+          whether either change makes large refreshes better.
+        </p>
+        <p class="source-reference">
+          Based on
+          <a
+            href="https://github.com/Rhythm-Sanghi/Threadmark/blob/1ff28c900bd875c90a42183feac43ff2d4f2dc54/docs/performance.md"
+            >performance methods and raw results</a
+          >. <a href="/work/threadmark/#results">See the measurement table →</a>
+        </p>
+      </article>
+      <footer class="document-footer">
+        <a href="/#work">← Selected work</a
+        ><a href="/#contact">Get in touch ↗</a
+        ><span>© <span id="year">2026</span> Rhythm Sanghi</span>
+      </footer>
+    </main>
+  </body>
+</html>

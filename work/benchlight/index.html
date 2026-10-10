@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f4f1" />
+    <meta
+      name="description"
+      content="A Windows workspace utility built around measured storage, tool evidence, and explicit cleanup review."
+    />
+    <title>Benchlight — Rhythm Sanghi</title>
+    <link
+      rel="canonical"
+      href="https://rhythm-sanghi.github.io/work/benchlight/"
+    />
+    <meta property="og:title" content="Benchlight — Rhythm Sanghi" />
+    <meta
+      property="og:description"
+      content="A Windows workspace utility built around measured storage, tool evidence, and explicit cleanup review."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://rhythm-sanghi.github.io/work/benchlight/"
+    />
+    <meta
+      property="og:image"
+      content="https://rhythm-sanghi.github.io/assets/social.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Rhythm Sanghi — desktop tools, experiments, and notes"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/assets/mark.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/touch-icon.png" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <link rel="stylesheet" href="/src/pages.css" />
+    <script src="/src/theme.js"></script>
+    <script type="module" src="/src/app.js"></script>
+    <script type="module" src="/src/examples.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="identity" href="/" aria-label="Rhythm Sanghi, home"
+        ><svg class="personal-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M7 25V7h8a6 6 0 0 1 0 12H7m8 0 10 6M19 7h6" /></svg
+        ><span>Rhythm Sanghi</span></a
+      >
+      <span class="header-path">personal / portfolio</span>
+      <div class="header-actions">
+        <button
+          id="theme-toggle"
+          class="quiet-button"
+          hidden
+          aria-label="Switch to dark theme"
+        >
+          <span aria-hidden="true">◐</span
+          ><span id="theme-label">Dark</span></button
+        ><a class="header-github" href="/#contact"
+          >Contact <span aria-hidden="true">↗</span></a
+        >
+      </div>
+    </header>
+    <main id="main" class="document-page case-study" tabindex="-1">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Portfolio</a><span aria-hidden="true">/</span
+        ><span>Benchlight</span>
+      </nav>
+      <nav class="page-index" aria-label="On this page">
+        <a href="#problem">Problem</a><a href="#workflow">Walkthrough</a
+        ><a href="#example">Example</a><a href="#decisions">Decisions</a
+        ><a href="#results">Measurements</a><a href="#limits">Limits</a>
+      </nav>
+      <header class="document-hero">
+        <p class="eyebrow">Selected work / Workspace utility</p>
+        <h1>Benchlight</h1>
+        <p class="document-deck">
+          Know what is there before deciding what goes.
+        </p>
+        <p class="document-intro">
+          Benchlight brings storage measurements, toolchain observations and
+          workspace changes into one local Windows application. Its most
+          important output is an explanation I can review.
+        </p>
+        <div class="project-links">
+          <a
+            class="button button-ochre"
+            href="https://github.com/Rhythm-Sanghi/Benchlight/releases"
+            >Download for Windows ↗</a
+          ><a href="https://github.com/Rhythm-Sanghi/Benchlight"
+            >View source ↗</a
+          >
+        </div>
+        <dl class="case-facts">
+          <div>
+            <dt>Project</dt>
+            <dd>Personal software project</dd>
+          </div>
+          <div>
+            <dt>Stack</dt>
+            <dd>Rust, Tauri, React, SQLite</dd>
+          </div>
+          <div>
+            <dt>Stage</dt>
+            <dd>Early Windows release · v0.1.0</dd>
+          </div>
+          <div>
+            <dt>Release</dt>
+            <dd><time datetime="2026-10-09">9 October 2026</time></dd>
+          </div>
+        </dl>
+        <p class="release-note">
+          Windows 11 x64, WebView2 required. Builds are unsigned.
+          <a
+            href="https://github.com/Rhythm-Sanghi/Benchlight/blob/b51c95b513ae9665bf5dfb0fea334bde4cf4f895/docs/release.md"
+            >Installation notes ↗</a
+          >
+        </p>
+      </header>
+      <section id="problem" class="prose">
+        <h2>A workspace holds more than source files</h2>
+        <p>
+          Projects accumulate dependencies, caches, tool installations and
+          environment changes. A large folder might be rebuildable, but its name
+          alone cannot tell me whether it contains something valuable. A
+          familiar version command might resolve to a different executable than
+          expected.
+        </p>
+        <p>
+          The project includes a scanner, saved observations, tool discovery,
+          comparison and explicit cleanup planning, exposed through a shared
+          Rust engine, desktop UI and CLI.
+        </p>
+      </section>
+      <section id="workflow">
+        <div class="walkthrough">
+          <p class="eyebrow">Interface walkthrough</p>
+          <p>
+            Open a step to inspect the capture. Each image can be opened at full
+            size.
+          </p>
+          <details class="walkthrough-step" open>
+            <summary>
+              <span class="mono">01</span> Measure the workspace<span
+                aria-hidden="true"
+                >+</span
+              >
+            </summary>
+            <div>
+              <p>
+                The Space view shows directory measurements, classifications and
+                reviewable cleanup plans.
+              </p>
+              <figure class="capture-zoom">
+                <a
+                  href="/assets/benchlight-space.webp"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Open Benchlight measure the workspace screenshot in a new tab"
+                  ><img
+                    src="/assets/benchlight-space.webp"
+                    width="1600"
+                    height="850"
+                    loading="lazy"
+                    alt="The Space view shows directory measurements, classifications and reviewable cleanup plans."
+                /></a>
+                <figcaption>
+                  Benchlight · Measure the workspace.
+                  <a
+                    href="/assets/benchlight-space.webp"
+                    target="_blank"
+                    rel="noopener"
+                    >Open full image ↗</a
+                  >
+                </figcaption>
+                <button class="focus-toggle" aria-pressed="false" hidden>
+                  Focus on the right-hand detail
+                </button>
+              </figure>
+            </div>
+          </details>
+          <details class="walkthrough-step">
+            <summary>
+              <span class="mono">02</span> Inspect the toolchain<span
+                aria-hidden="true"
+                >+</span
+              >
+            </summary>
+            <div>
+              <p>
+                The Tools view shows resolved executables, versions and
+                installation evidence.
+              </p>
+              <figure class="capture-zoom">
+                <a
+                  href="/assets/benchlight-tools.png"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Open Benchlight inspect the toolchain screenshot in a new tab"
+                  ><img
+                    src="/assets/benchlight-tools.png"
+                    width="1920"
+                    height="1020"
+                    loading="lazy"
+                    alt="The Tools view shows resolved executables, versions and installation evidence."
+                /></a>
+                <figcaption>
+                  Benchlight · Inspect the toolchain.
+                  <a
+                    href="/assets/benchlight-tools.png"
+                    target="_blank"
+                    rel="noopener"
+                    >Open full image ↗</a
+                  >
+                </figcaption>
+                <button class="focus-toggle" aria-pressed="false" hidden>
+                  Focus on the right-hand detail
+                </button>
+              </figure>
+            </div>
+          </details>
+          <details class="walkthrough-step">
+            <summary>
+              <span class="mono">03</span> Compare a snapshot<span
+                aria-hidden="true"
+                >+</span
+              >
+            </summary>
+            <div>
+              <p>The Changes view compares recorded workspace observations.</p>
+              <figure class="capture-zoom">
+                <a
+                  href="/assets/benchlight-changes.png"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Open Benchlight compare a snapshot screenshot in a new tab"
+                  ><img
+                    src="/assets/benchlight-changes.png"
+                    width="1920"
+                    height="1020"
+                    loading="lazy"
+                    alt="The Changes view compares recorded workspace observations."
+                /></a>
+                <figcaption>
+                  Benchlight · Compare a snapshot.
+                  <a
+                    href="/assets/benchlight-changes.png"
+                    target="_blank"
+                    rel="noopener"
+                    >Open full image ↗</a
+                  >
+                </figcaption>
+                <button class="focus-toggle" aria-pressed="false" hidden>
+                  Focus on the right-hand detail
+                </button>
+              </figure>
+            </div>
+          </details>
+        </div>
+        <p class="capture-note">
+          Benchlight 0.1.0, captured on Windows from a local repository scan and
+          installed tools on 9 October 2026. Values and paths vary by machine.
+          <a
+            href="https://github.com/Rhythm-Sanghi/Benchlight/blob/b51c95b513ae9665bf5dfb0fea334bde4cf4f895/docs/screenshots/README.md"
+            >Capture details ↗</a
+          >
+        </p>
+      </section>
+      <section id="example" class="demo-panel" data-demo="benchlight">
+        <p class="eyebrow">Try a review</p>
+        <h2>What deserves another look?</h2>
+        <p>
+          Illustrative data, not a scan. Choose a directory to see its
+          classification. Nothing is read or deleted.
+        </p>
+        <div class="demo-layout">
+          <div
+            class="demo-nodes"
+            hidden
+            role="group"
+            aria-label="Select a sample directory"
+          >
+            <button data-directory="dependencies" aria-pressed="true">
+              node_modules · 240 MiB</button
+            ><button data-directory="source" aria-pressed="false">
+              src · 12 MiB</button
+            ><button data-directory="unknown" aria-pressed="false">
+              archive · 80 MiB</button
+            ><button data-directory="partial" aria-pressed="false">
+              cache · incomplete
+            </button>
+          </div>
+          <div class="demo-result" role="status" aria-live="polite">
+            <h3 id="directory-classification">Rebuildable · review required</h3>
+            <p id="directory-reason">
+              A dependency directory next to a package manifest is a candidate
+              for review. Local edits may still be valuable.
+            </p>
+            <p id="directory-action">
+              Before any real cleanup: inspect the contents, create a plan,
+              revalidate it and explicitly confirm recycling.
+            </p>
+            <p class="annotation">
+              Logical size is not a promise of recovered space. This example has
+              no cleanup action.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="decisions" class="prose">
+        <h2>Two places where certainty would be misleading</h2>
+        <h3>Rebuildable is a classification, not permission</h3>
+        <p>
+          Benchlight separates Rebuildable, Cache, Review and Protected items.
+          An ordinary cleanup plan accepts only fully measured eligible
+          directories. The plan records the filesystem identity, metadata
+          fingerprint and relevant project evidence.
+        </p>
+        <p>
+          Applying a plan revalidates that evidence, then requires explicit
+          confirmation. The Windows adapter requests recycling and records
+          staged paths for recovery. Changed or incomplete evidence cannot be
+          overridden by confirmation. It is conservative coordination with
+          ordinary filesystem changes, not a security boundary against a hostile
+          process.
+        </p>
+        <h3>Installation origin can stay unknown</h3>
+        <p>
+          Tools are resolved against the application's PATH. First and shadowed
+          matches are kept visible. Local metadata can support an
+          installation-origin inference, but a matching online package name
+          would not prove ownership. Benchlight therefore keeps evidence and
+          confidence beside the answer.
+        </p>
+        <p>
+          <a
+            href="https://github.com/Rhythm-Sanghi/Benchlight/blob/b51c95b513ae9665bf5dfb0fea334bde4cf4f895/docs/cleanup.md"
+            >Cleanup and recovery design ↗</a
+          >
+          · <a href="/notes/tool-origins/">Read the tool-origin note →</a>
+        </p>
+      </section>
+      <section id="results">
+        <h2>One development measurement</h2>
+        <div
+          class="table-scroll"
+          role="region"
+          aria-label="Benchlight scanner benchmark"
+          tabindex="0"
+        >
+          <table>
+            <caption>
+              Version 0.1.0 · Windows x86-64 · optimized build · 7 October 2026
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Fixture</th>
+                <th scope="col">Scan</th>
+                <th scope="col">100 page queries</th>
+                <th scope="col">Cancellation return</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">50 projects / 20,050 files</th>
+                <td>5,570 ms</td>
+                <td>42 ms</td>
+                <td>8 ms</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="measurement-context">
+          <h3>Read this as a development observation</h3>
+          <p>
+            The generated fixture contained 10,240,100 logical bytes.
+            Cancellation was requested 100 ms into a second scan. Memory was
+            sampled every 200 ms, so its recorded peak of 7,892,992 bytes is a
+            lower bound on the instantaneous peak.
+          </p>
+          <p>
+            Other development builds and a repository scan were running. OS
+            caches were not flushed and CPU/RAM were not recorded in the source
+            note. This run is unsuitable for a controlled speed comparison or a
+            general throughput claim.
+          </p>
+          <p>
+            <a
+              href="https://github.com/Rhythm-Sanghi/Benchlight/blob/b51c95b513ae9665bf5dfb0fea334bde4cf4f895/docs/benchmarks.md"
+              >Measurement method and reproduction script ↗</a
+            >
+          </p>
+        </div>
+      </section>
+      <section id="limits" class="prose">
+        <h2>What still needs broader testing</h2>
+        <p>
+          New network and mapped-network scan roots are rejected. Links and
+          nonresident cloud placeholders are skipped; an in-flight Windows read
+          can delay cancellation. Logical file size is not the same as reclaimed
+          disk space.
+        </p>
+        <p>
+          Broader version-upgrade testing, live cloud hydration and physical
+          removable-drive testing remain open. Tool discovery reflects the
+          application's environment, which can differ from a shell's aliases and
+          version-manager choices. Unknown results should stay visible.
+        </p>
+        <a class="text-link" href="/work/threadmark/">Back to Threadmark →</a>
+      </section>
+
+      <footer class="document-footer">
+        <a href="/#work">← Selected work</a
+        ><a href="/#contact">Get in touch ↗</a
+        ><span>© <span id="year">2026</span> Rhythm Sanghi</span>
+      </footer>
+    </main>
+  </body>
+</html>

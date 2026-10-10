@@ -1,0 +1,13 @@
+name: Check outbound links
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "20 6 1 * *"
+permissions:
+  contents: read
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: node scripts/check-links.cjs

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f4f1" />
+    <meta
+      name="description"
+      content="Build notes by Rhythm Sanghi: an edge should explain itself."
+    />
+    <title>An edge should explain itself — Rhythm Sanghi</title>
+    <link
+      rel="canonical"
+      href="https://rhythm-sanghi.github.io/notes/relationships/"
+    />
+    <meta
+      property="og:title"
+      content="An edge should explain itself — Rhythm Sanghi"
+    />
+    <meta
+      property="og:description"
+      content="Build notes by Rhythm Sanghi: an edge should explain itself."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://rhythm-sanghi.github.io/notes/relationships/"
+    />
+    <meta
+      property="og:image"
+      content="https://rhythm-sanghi.github.io/assets/social.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Rhythm Sanghi — desktop tools, experiments, and notes"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/assets/mark.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/touch-icon.png" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <link rel="stylesheet" href="/src/pages.css" />
+    <script src="/src/theme.js"></script>
+    <script type="module" src="/src/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="identity" href="/" aria-label="Rhythm Sanghi, home"
+        ><svg class="personal-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M7 25V7h8a6 6 0 0 1 0 12H7m8 0 10 6M19 7h6" /></svg
+        ><span>Rhythm Sanghi</span></a
+      >
+      <span class="header-path">personal / portfolio</span>
+      <div class="header-actions">
+        <button
+          id="theme-toggle"
+          class="quiet-button"
+          hidden
+          aria-label="Switch to dark theme"
+        >
+          <span aria-hidden="true">◐</span
+          ><span id="theme-label">Dark</span></button
+        ><a class="header-github" href="/#contact"
+          >Contact <span aria-hidden="true">↗</span></a
+        >
+      </div>
+    </header>
+    <main id="main" class="document-page note-page" tabindex="-1">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Portfolio</a><span aria-hidden="true">/</span
+        ><span>An edge should explain itself</span>
+      </nav>
+      <header class="document-hero">
+        <p class="eyebrow">Threadmark / Graph model</p>
+        <h1>An edge should explain itself</h1>
+        <p class="note-date">
+          Written from the current project documentation ·
+          <time datetime="2026-10-10">10 October 2026</time>
+        </p>
+      </header>
+      <article class="prose">
+        <p>
+          A relationship map quickly becomes persuasive. Draw a line from one
+          function to another and it looks authoritative, even when the resolver
+          had only partial information. The useful question is not just “are
+          these connected?” It is “what observation supports this connection?”
+        </p>
+        <h2>Keep the explanation with the edge</h2>
+        <p>
+          Threadmark stores a directed source-to-dependency relationship with
+          its kind, confidence, source path, span, adapter and a bounded excerpt
+          of evidence. The inspector can take a line on the map back to the code
+          that produced it.
+        </p>
+        <p>
+          Structural edges such as CONTAINS and EXPORTS describe containment.
+          CALLS and REFERENCES need a supported static relationship. EXACT
+          identifies direct syntax; RESOLVED identifies an unambiguous target
+          through supported resolution. Neither label promises a runtime
+          binding.
+        </p>
+        <h2>Uncertainty is part of the result</h2>
+        <p>
+          A computed import or ambiguous declaration is more useful as a
+          diagnostic than as a confident-looking invented edge. The current
+          release does not manufacture inferred edges, even though the impact
+          engine has a way to carry inferred paths in future.
+        </p>
+        <p>
+          That choice leaves gaps. It also makes the map inspectable: a missing
+          answer is not disguised as a definitive one.
+        </p>
+        <h2>Stable identity, changing evidence</h2>
+        <p>
+          Source line numbers move constantly. Symbol IDs therefore exclude line
+          numbers, while spans still locate the evidence. Git relationship
+          comparisons use semantic tuples so a shifted line does not create a
+          spurious dependency change.
+        </p>
+        <p>
+          A file rename is different: path is part of symbol identity, so the
+          current comparison shows added and removed symbols. That limitation
+          belongs beside the feature, rather than in a footnote nobody finds.
+        </p>
+        <p class="source-reference">
+          Based on the
+          <a
+            href="https://github.com/Rhythm-Sanghi/Threadmark/blob/1ff28c900bd875c90a42183feac43ff2d4f2dc54/docs/graph-model.md"
+            >graph model</a
+          >
+          and
+          <a
+            href="https://github.com/Rhythm-Sanghi/Threadmark/blob/1ff28c900bd875c90a42183feac43ff2d4f2dc54/docs/architecture.md"
+            >architecture</a
+          >. <a href="/work/threadmark/">See the full case study →</a>
+        </p>
+      </article>
+      <footer class="document-footer">
+        <a href="/#work">← Selected work</a
+        ><a href="/#contact">Get in touch ↗</a
+        ><span>© <span id="year">2026</span> Rhythm Sanghi</span>
+      </footer>
+    </main>
+  </body>
+</html>

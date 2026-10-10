@@ -26,6 +26,7 @@ const navLinks = [...document.querySelectorAll(".section-nav a")];
 const sections = navLinks.map((link) => document.querySelector(link.hash));
 let scrollQueued = false;
 function markSection() {
+  if (!sections.length) return;
   const threshold = innerWidth <= 900 ? 145 : 135;
   let active = sections[0];
   for (const section of sections)
@@ -54,26 +55,8 @@ addEventListener(
 );
 addEventListener("resize", markSection);
 markSection();
-const filters = document.querySelector(".project-filters");
-filters.hidden = false;
-filters.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-filter]");
-  if (!button) return;
-  let count = 0;
-  for (const project of document.querySelectorAll(".project-row")) {
-    project.hidden =
-      button.dataset.filter !== "all" &&
-      project.dataset.category !== button.dataset.filter;
-    if (!project.hidden) count++;
-  }
-  for (const item of filters.querySelectorAll("button"))
-    item.setAttribute("aria-pressed", String(item === button));
-  document.querySelector("#filter-status").textContent =
-    `${count} projects shown. Filter: ${button.textContent}.`;
-  markSection();
-});
 const copyButton = document.querySelector("#copy-email");
-if (navigator.clipboard?.writeText) {
+if (copyButton && navigator.clipboard?.writeText) {
   copyButton.hidden = false;
   copyButton.addEventListener("click", async () => {
     const status = document.querySelector("#copy-status");

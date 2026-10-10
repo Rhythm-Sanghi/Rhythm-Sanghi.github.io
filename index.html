@@ -23,13 +23,42 @@
       property="og:image:alt"
       content="Rhythm Sanghi — desktop tools, experiments, and notes"
     />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href="https://rhythm-sanghi.github.io/" />
     <link rel="icon" href="assets/mark.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="src/styles.css" />
+    <link rel="apple-touch-icon" href="assets/touch-icon.png" />
+    <link rel="stylesheet" href="src/pages.css" />
     <script src="src/theme.js"></script>
     <script type="module" src="src/app.js"></script>
     <title>Rhythm Sanghi — Software & notes</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://rhythm-sanghi.github.io/#person",
+            "name": "Rhythm Sanghi",
+            "url": "https://rhythm-sanghi.github.io/",
+            "sameAs": [
+              "https://github.com/Rhythm-Sanghi",
+              "https://x.com/RhythmSang84584"
+            ],
+            "knowsAbout": ["Rust", "React", "Desktop software"]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://rhythm-sanghi.github.io/#website",
+            "url": "https://rhythm-sanghi.github.io/",
+            "name": "Rhythm Sanghi — Software & notes",
+            "author": { "@id": "https://rhythm-sanghi.github.io/#person" }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -49,8 +78,8 @@
         >
           <span aria-hidden="true">◐</span
           ><span id="theme-label">Dark</span></button
-        ><a class="header-github" href="https://github.com/Rhythm-Sanghi"
-          >GitHub <span aria-hidden="true">↗</span></a
+        ><a class="header-github" href="#contact"
+          >Contact <span aria-hidden="true">↗</span></a
         >
       </div>
     </header>
@@ -58,12 +87,11 @@
       <aside class="rail" aria-label="Portfolio index">
         <p class="rail-label mono">INDEX</p>
         <nav class="section-nav" aria-label="Sections">
-          <a href="#work" aria-current="location"
-            ><span>01</span> Selected work</a
-          ><a href="#projects"><span>02</span> Other projects</a
-          ><a href="#notes"><span>03</span> Build notes</a
-          ><a href="#about"><span>04</span> A bit about me</a
-          ><a href="#contact"><span>05</span> Get in touch</a>
+          <a href="#work" aria-current="location"><span>01</span> Work</a
+          ><a href="#projects"><span>02</span> Projects</a
+          ><a href="#notes"><span>03</span> Notes</a
+          ><a href="#about"><span>04</span> About</a
+          ><a href="#contact"><span>05</span> Contact</a>
         </nav>
         <div class="rail-bottom">
           <div class="rail-symbol" aria-hidden="true">r<span>.</span>s</div>
@@ -88,20 +116,22 @@
               <span>Sanghi.</span>
             </h1>
             <p class="intro-copy">
-              I’m a computer science student. I build desktop tools to make
-              unfamiliar code and cluttered workspaces easier to understand.
+              I build local-first desktop tools in Rust and React. I’m a
+              computer science student working on ways to inspect unfamiliar
+              code and cluttered workspaces.
             </p>
             <a class="text-link" href="#work"
-              >Take a look at my work <span aria-hidden="true">↓</span></a
+              >Selected work <span aria-hidden="true">↓</span></a
             >
+            <a class="intro-profile" href="/profile/">Profile &amp; resume →</a>
           </div>
           <div class="desk-note">
             <div class="note-header mono">
               <span>ON MY DESK</span><span aria-hidden="true">[ 02 ]</span>
             </div>
             <p class="desk-thought">
-              Most of my projects start<br />
-              with something I want<br />
+              Most of my projects start 
+              with something I want 
               to understand better.
             </p>
             <a class="desk-project" href="#threadmark"
@@ -147,6 +177,9 @@
                   alt=""
                 />
                 <h3>Threadmark</h3>
+                <span class="project-status"
+                  >Early release candidate · v0.1.1</span
+                >
                 <span class="project-kind mono">CODE EXPLORER</span>
               </div>
               <p class="project-deck">
@@ -159,18 +192,25 @@
                 has evidence you can open.
               </p>
               <div class="project-links">
-                <a
-                  class="button button-green"
-                  href="https://github.com/Rhythm-Sanghi/Threadmark"
-                  >Explore the project <span aria-hidden="true">↗</span></a
+                <a class="button button-green" href="/work/threadmark/"
+                  >Read case study <span aria-hidden="true">↗</span></a
                 ><a href="https://github.com/Rhythm-Sanghi/Threadmark/releases"
-                  >Releases <span aria-hidden="true">↗</span></a
+                  >Download for Windows <span aria-hidden="true">↗</span></a
                 >
               </div>
               <dl class="project-facts">
                 <div>
                   <dt>Built with</dt>
                   <dd>Rust · Tauri · React · SQLite</dd>
+                </div>
+                <div>
+                  <dt>Release</dt>
+                  <dd>
+                    <time datetime="2026-10-09">9 Oct 2026</time> ·
+                    <a href="https://github.com/Rhythm-Sanghi/Threadmark"
+                      >Source ↗</a
+                    >
+                  </dd>
                 </div>
                 <div>
                   <dt>Runs on</dt>
@@ -195,7 +235,7 @@
               <figcaption>
                 <span class="mono">THREADMARK / RELATIONSHIP MAP</span
                 ><span
-                  >Actual application capture
+                  >Engine-backed interface capture
                   <span aria-hidden="true">↗</span></span
                 >
               </figcaption>
@@ -214,7 +254,7 @@
                   can concentrate on the part of the code you’re looking at.
                 </p>
                 <a
-                  href="https://github.com/Rhythm-Sanghi/Threadmark/blob/main/docs/architecture.md"
+                  href="https://github.com/Rhythm-Sanghi/Threadmark/blob/1ff28c900bd875c90a42183feac43ff2d4f2dc54/docs/architecture.md"
                   >Read the architecture notes
                   <span aria-hidden="true">↗</span></a
                 >
@@ -231,6 +271,9 @@
                   alt=""
                 />
                 <h3>Benchlight</h3>
+                <span class="project-status"
+                  >Early Windows release · v0.1.0</span
+                >
                 <span class="project-kind mono">WORKSPACE UTILITY</span>
               </div>
               <p class="project-deck">
@@ -243,18 +286,25 @@
                 before cleaning anything up.
               </p>
               <div class="project-links">
-                <a
-                  class="button button-ochre"
-                  href="https://github.com/Rhythm-Sanghi/Benchlight"
-                  >Explore the project <span aria-hidden="true">↗</span></a
+                <a class="button button-ochre" href="/work/benchlight/"
+                  >Read case study <span aria-hidden="true">↗</span></a
                 ><a href="https://github.com/Rhythm-Sanghi/Benchlight/releases"
-                  >Releases <span aria-hidden="true">↗</span></a
+                  >Download for Windows <span aria-hidden="true">↗</span></a
                 >
               </div>
               <dl class="project-facts">
                 <div>
                   <dt>Built with</dt>
                   <dd>Rust · Tauri · React · SQLite</dd>
+                </div>
+                <div>
+                  <dt>Release</dt>
+                  <dd>
+                    <time datetime="2026-10-09">9 Oct 2026</time> ·
+                    <a href="https://github.com/Rhythm-Sanghi/Benchlight"
+                      >Source ↗</a
+                    >
+                  </dd>
                 </div>
                 <div>
                   <dt>Runs on</dt>
@@ -299,7 +349,7 @@
                   presented as a promise of recovered space.
                 </p>
                 <a
-                  href="https://github.com/Rhythm-Sanghi/Benchlight/blob/main/docs/cleanup.md"
+                  href="https://github.com/Rhythm-Sanghi/Benchlight/blob/b51c95b513ae9665bf5dfb0fea334bde4cf4f895/docs/cleanup.md"
                   >Read the cleanup design <span aria-hidden="true">↗</span></a
                 >
               </div>
@@ -321,104 +371,39 @@
               >All repositories <span aria-hidden="true">↗</span></a
             >
           </div>
-          <div class="project-toolbar">
-            <p>Some useful, some experimental.</p>
-            <div
-              class="project-filters"
-              role="group"
-              aria-label="Filter projects"
-              hidden
-            >
-              <button data-filter="all" aria-pressed="true">All</button
-              ><button data-filter="tools" aria-pressed="false">Tools</button
-              ><button data-filter="experiments" aria-pressed="false">
-                Experiments</button
-              ><button data-filter="play" aria-pressed="false">Play</button>
-            </div>
-          </div>
+          <p class="section-intro">
+            Tools, prototypes and experiments. Each label describes the kind of
+            project, not a promise of production readiness.
+          </p>
           <div class="project-list">
-            <a
-              class="project-row"
-              data-category="tools"
-              href="https://github.com/Rhythm-Sanghi/HearGlass"
-              ><span class="row-index mono">01</span>
-              <div>
-                <h3>HearGlass</h3>
-                <p>
-                  Local speech transcription with Whisper and voice activity
-                  detection.
-                </p>
-              </div>
-              <span class="row-tech mono">Python / Whisper</span
-              ><span class="row-arrow" aria-hidden="true">↗</span></a
-            >
-            <a
-              class="project-row"
-              data-category="experiments"
-              href="https://github.com/Rhythm-Sanghi/OmniSpace"
-              ><span class="row-index mono">02</span>
-              <div>
-                <h3>OmniSpace</h3>
-                <p>
-                  A cross-device workspace prototype: shared state, screen
-                  streams, and input.
-                </p>
-              </div>
-              <span class="row-tech mono">TypeScript / Rust</span
-              ><span class="row-arrow" aria-hidden="true">↗</span></a
-            >
-            <a
-              class="project-row"
-              data-category="tools"
-              href="https://github.com/Rhythm-Sanghi/bhumisetu-indore"
-              ><span class="row-index mono">03</span>
-              <div>
-                <h3>BhumiSetu</h3>
-                <p>
-                  A map-led workbench for comparing and reviewing Indore
-                  reference data.
-                </p>
-              </div>
-              <span class="row-tech mono">Python / OpenLayers</span
-              ><span class="row-arrow" aria-hidden="true">↗</span></a
-            >
-            <a
-              class="project-row"
-              data-category="play"
-              href="https://github.com/Rhythm-Sanghi/Serpens"
-              ><span class="row-index mono">04</span>
-              <div>
-                <h3>Serpens</h3>
-                <p>
-                  Snake, with biome effects, a rewind mechanic, and an
-                  autopilot.
-                </p>
-              </div>
-              <span class="row-tech mono">TypeScript / Capacitor</span
-              ><span class="row-arrow" aria-hidden="true">↗</span></a
-            >
-            <a
-              class="project-row"
-              data-category="experiments"
-              href="https://github.com/Rhythm-Sanghi/flash-speaker"
-              ><span class="row-index mono">05</span>
-              <div>
-                <h3>Flash Speaker</h3>
-                <p>
-                  An experiment in synchronized browser audio across nearby
-                  devices.
-                </p>
-              </div>
-              <span class="row-tech mono">JavaScript / WebRTC</span
-              ><span class="row-arrow" aria-hidden="true">↗</span></a
-            >
+            <!-- projects:start -->
+            <a class="project-row" href="https://github.com/Rhythm-Sanghi/HearGlass">
+              <span class="row-index mono">01</span>
+              <div><h3>HearGlass <span class="project-status">Tool</span></h3><p>Local speech transcription with Whisper and voice activity detection.</p></div>
+              <span class="row-tech mono">Python / Whisper</span><span class="row-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="project-row" href="https://github.com/Rhythm-Sanghi/OmniSpace">
+              <span class="row-index mono">02</span>
+              <div><h3>OmniSpace <span class="project-status">Prototype</span></h3><p>A cross-device workspace prototype: shared state, screen streams, and input.</p></div>
+              <span class="row-tech mono">TypeScript / Rust</span><span class="row-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="project-row" href="https://github.com/Rhythm-Sanghi/bhumisetu-indore">
+              <span class="row-index mono">03</span>
+              <div><h3>BhumiSetu <span class="project-status">Tool</span></h3><p>A map-led workbench for comparing and reviewing Indore reference data.</p></div>
+              <span class="row-tech mono">Python / OpenLayers</span><span class="row-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="project-row" href="https://github.com/Rhythm-Sanghi/Serpens">
+              <span class="row-index mono">04</span>
+              <div><h3>Serpens <span class="project-status">Game</span></h3><p>Snake, with biome effects, a rewind mechanic, and an autopilot.</p></div>
+              <span class="row-tech mono">TypeScript / Capacitor</span><span class="row-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="project-row" href="https://github.com/Rhythm-Sanghi/flash-speaker">
+              <span class="row-index mono">05</span>
+              <div><h3>Flash Speaker <span class="project-status">Experiment</span></h3><p>An experiment in synchronized browser audio across nearby devices.</p></div>
+              <span class="row-tech mono">JavaScript / WebRTC</span><span class="row-arrow" aria-hidden="true">↗</span>
+            </a>
+            <!-- projects:end -->
           </div>
-          <p
-            id="filter-status"
-            class="sr-only"
-            role="status"
-            aria-live="polite"
-          ></p>
         </section>
         <section
           id="notes"
@@ -434,16 +419,14 @@
             >
           </div>
           <p class="section-intro">
-            A few decisions from the project notebooks. The code is one part;
-            deciding what a tool should do is the other.
+            Short notes on code relationships, tool discovery and the costs
+            hiding behind a cache hit.
           </p>
           <div class="notes-grid">
-            <a
-              class="build-note"
-              href="https://github.com/Rhythm-Sanghi/Threadmark/blob/main/docs/graph-model.md"
+            <a class="build-note" href="/notes/relationships/"
               ><span class="note-label mono">THREADMARK / 01</span>
               <h3>
-                A relationship should<br />
+                A relationship should 
                 come with evidence.
               </h3>
               <p>
@@ -451,14 +434,12 @@
                 edge and a runtime guarantee.
               </p>
               <span class="note-link"
-                >Read the graph model <span aria-hidden="true">↗</span></span
+                >Read the note <span aria-hidden="true">↗</span></span
               ></a
-            ><a
-              class="build-note"
-              href="https://github.com/Rhythm-Sanghi/Benchlight/blob/main/docs/tools.md"
+            ><a class="build-note" href="/notes/tool-origins/"
               ><span class="note-label mono">BENCHLIGHT / 02</span>
               <h3>
-                Which executable<br />
+                Which executable 
                 am I actually running?
               </h3>
               <p>
@@ -466,14 +447,12 @@
                 sometimes stays unknown.
               </p>
               <span class="note-link"
-                >Read the tool notes <span aria-hidden="true">↗</span></span
+                >Read the note <span aria-hidden="true">↗</span></span
               ></a
-            ><a
-              class="build-note"
-              href="https://github.com/Rhythm-Sanghi/Threadmark/blob/main/docs/performance.md"
+            ><a class="build-note" href="/notes/measuring-refresh/"
               ><span class="note-label mono">THREADMARK / 03</span>
               <h3>
-                Measure the work,<br />
+                Measure the work, 
                 not just the headline.
               </h3>
               <p>
@@ -481,7 +460,7 @@
                 Benchmarks with their limits attached.
               </p>
               <span class="note-link"
-                >Read the measurements <span aria-hidden="true">↗</span></span
+                >Read the note <span aria-hidden="true">↗</span></span
               ></a
             >
           </div>
@@ -513,7 +492,7 @@
                 the work.
               </p>
               <a class="text-link" href="https://github.com/Rhythm-Sanghi"
-                >The rest is on GitHub <span aria-hidden="true">↗</span></a
+                >More on GitHub <span aria-hidden="true">↗</span></a
               >
             </div>
             <div class="education">
@@ -523,17 +502,39 @@
                 <h3>B.Tech, Computer Science</h3>
                 <p>Swami Vivekanand College of Engineering</p>
               </div>
-              <div>
-                <span class="mono">2024</span>
-                <h3>Higher secondary</h3>
-                <p>88% · Class XII</p>
-              </div>
-              <div>
-                <span class="mono">2022</span>
-                <h3>Secondary</h3>
-                <p>97% · Class X</p>
-              </div>
+              <p class="education-detail">
+                Class XII: 88% (2024)<br />Class X: 97% (2022)
+              </p>
+              <a class="text-link" href="/profile/">Profile &amp; resume →</a>
             </div>
+          </div>
+          <div class="capabilities">
+            <p class="eyebrow">What I work with</p>
+            <ul>
+              <li>
+                <a href="/work/threadmark/#decisions"
+                  >Rust analysis engines &amp; CLI tools
+                  <span>Threadmark</span></a
+                >
+              </li>
+              <li>
+                <a href="/work/benchlight/#decisions"
+                  >Tauri &amp; React desktop interfaces
+                  <span>Benchlight</span></a
+                >
+              </li>
+              <li>
+                <a href="/notes/measuring-refresh/"
+                  >SQLite, caching &amp; measured performance
+                  <span>Build notes</span></a
+                >
+              </li>
+              <li>
+                <a href="https://github.com/Rhythm-Sanghi/HearGlass"
+                  >Local speech processing <span>HearGlass</span></a
+                >
+              </li>
+            </ul>
           </div>
         </section>
         <section
@@ -551,8 +552,9 @@
                 in mind?
               </h2>
               <p>
-                A project, an opportunity, or a detail in one of my tools.<br />
-                I’d like to hear about it.
+                Interested in discussing internships, desktop software and
+                developer-tool projects. Tell me the role or problem, the scope
+                and where I can learn more.
               </p>
             </div>
             <div class="contact-links">
@@ -576,7 +578,7 @@
         </section>
         <footer class="site-footer">
           <span>© <span id="year">2026</span> Rhythm Sanghi</span
-          ><span class="mono">HTML · CSS · JavaScript</span
+          ><a class="mono" href="/profile/">Profile &amp; resume</a
           ><a href="#top">Back to top ↑</a>
         </footer>
       </main>

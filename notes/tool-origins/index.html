@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f4f1" />
+    <meta
+      name="description"
+      content="Build notes by Rhythm Sanghi: which executable did i actually ask for?."
+    />
+    <title>Which executable did I actually ask for? — Rhythm Sanghi</title>
+    <link
+      rel="canonical"
+      href="https://rhythm-sanghi.github.io/notes/tool-origins/"
+    />
+    <meta
+      property="og:title"
+      content="Which executable did I actually ask for? — Rhythm Sanghi"
+    />
+    <meta
+      property="og:description"
+      content="Build notes by Rhythm Sanghi: which executable did i actually ask for?."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://rhythm-sanghi.github.io/notes/tool-origins/"
+    />
+    <meta
+      property="og:image"
+      content="https://rhythm-sanghi.github.io/assets/social.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Rhythm Sanghi — desktop tools, experiments, and notes"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/assets/mark.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/touch-icon.png" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <link rel="stylesheet" href="/src/pages.css" />
+    <script src="/src/theme.js"></script>
+    <script type="module" src="/src/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="identity" href="/" aria-label="Rhythm Sanghi, home"
+        ><svg class="personal-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M7 25V7h8a6 6 0 0 1 0 12H7m8 0 10 6M19 7h6" /></svg
+        ><span>Rhythm Sanghi</span></a
+      >
+      <span class="header-path">personal / portfolio</span>
+      <div class="header-actions">
+        <button
+          id="theme-toggle"
+          class="quiet-button"
+          hidden
+          aria-label="Switch to dark theme"
+        >
+          <span aria-hidden="true">◐</span
+          ><span id="theme-label">Dark</span></button
+        ><a class="header-github" href="/#contact"
+          >Contact <span aria-hidden="true">↗</span></a
+        >
+      </div>
+    </header>
+    <main id="main" class="document-page note-page" tabindex="-1">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Portfolio</a><span aria-hidden="true">/</span
+        ><span>Which executable did I actually ask for?</span>
+      </nav>
+      <header class="document-hero">
+        <p class="eyebrow">Benchlight / Tool discovery</p>
+        <h1>Which executable did I actually ask for?</h1>
+        <p class="note-date">
+          Written from the current project documentation ·
+          <time datetime="2026-10-10">10 October 2026</time>
+        </p>
+      </header>
+      <article class="prose">
+        <p>
+          A tool name is not an installation identity. Two copies of Node can
+          both be present, a shim can forward to another program, and an
+          interactive shell can apply an alias that a desktop process never
+          sees.
+        </p>
+        <h2>Start with what can be observed</h2>
+        <p>
+          Benchlight checks its process PATH in order and records the first
+          match alongside shadowed matches. It keeps the executable location
+          visible. This is an observation of the application's environment, not
+          a promise to reproduce every shell configuration.
+        </p>
+        <p>
+          Version probes use standard arguments with time and output limits.
+          Batch wrappers and Windows application aliases are not executed. Where
+          adjacent package metadata supplies a version, the interface labels it
+          as metadata rather than pretending a runtime command returned it.
+        </p>
+        <h2>An origin is an inference</h2>
+        <p>
+          Local uninstall records, installation-directory containment and
+          package-manager storage paths can support an origin. A familiar
+          display name by itself is weak evidence. Finding a package in an
+          online catalog would say even less about how a particular local
+          executable arrived.
+        </p>
+        <p>
+          The application therefore retains the reason and confidence. Some
+          installations remain Unknown. This is more useful than assigning a
+          plausible package manager and making the user debug an assumption.
+        </p>
+        <h2>Keep observation separate from action</h2>
+        <p>
+          Refreshing tools is explicit. Inspecting an arbitrary executable path
+          explains metadata; it does not run that path. Observations are saved
+          locally so the interface can show what was actually recorded instead
+          of silently changing the answer on each visit.
+        </p>
+        <p>
+          The version probe has process limits, but those limits are not a
+          sandbox for malicious software. Installed tools are executable code;
+          that boundary should remain clear.
+        </p>
+        <p class="source-reference">
+          Based on
+          <a
+            href="https://github.com/Rhythm-Sanghi/Benchlight/blob/b51c95b513ae9665bf5dfb0fea334bde4cf4f895/docs/tools.md"
+            >tools and installation evidence</a
+          >. <a href="/work/benchlight/">See the full case study →</a>
+        </p>
+      </article>
+      <footer class="document-footer">
+        <a href="/#work">← Selected work</a
+        ><a href="/#contact">Get in touch ↗</a
+        ><span>© <span id="year">2026</span> Rhythm Sanghi</span>
+      </footer>
+    </main>
+  </body>
+</html>

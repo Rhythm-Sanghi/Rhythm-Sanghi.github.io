@@ -1,0 +1,19 @@
+{
+  "checked": "2026-10-10",
+  "repositories": {
+    "Threadmark": "1ff28c900bd875c90a42183feac43ff2d4f2dc54",
+    "Benchlight": "b51c95b513ae9665bf5dfb0fea334bde4cf4f895"
+  },
+  "measurements": {
+    "Threadmark": {
+      "date": "2026-10-07",
+      "version": "0.1.1",
+      "source": "docs/performance.md"
+    },
+    "Benchlight": {
+      "date": "2026-10-07",
+      "version": "0.1.0",
+      "source": "docs/benchmarks.md"
+    }
+  }
+}

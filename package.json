@@ -4,7 +4,11 @@
   "description": "Rhythm Sanghi's personal portfolio.",
   "scripts": {
     "dev": "node scripts/serve.cjs",
-    "check": "node --check src/theme.js && node --check src/app.js && node --check scripts/serve.cjs"
+    "projects": "node scripts/projects.cjs",
+    "prepare-site": "node scripts/projects.cjs && node scripts/version.cjs",
+    "check": "node --check src/theme.js && node --check src/app.js && node --check src/examples.js && node --check scripts/serve.cjs && node scripts/projects.cjs --check && node scripts/check-site.cjs && node scripts/version.cjs --check",
+    "verify-live": "node scripts/verify-live.cjs",
+    "check-links": "node scripts/check-links.cjs"
   },
   "author": "Rhythm Sanghi"
 }

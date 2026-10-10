@@ -1,0 +1,37 @@
+[
+  {
+    "name": "HearGlass",
+    "url": "https://github.com/Rhythm-Sanghi/HearGlass",
+    "category": "Tool",
+    "description": "Local speech transcription with Whisper and voice activity detection.",
+    "stack": "Python / Whisper"
+  },
+  {
+    "name": "OmniSpace",
+    "url": "https://github.com/Rhythm-Sanghi/OmniSpace",
+    "category": "Prototype",
+    "description": "A cross-device workspace prototype: shared state, screen streams, and input.",
+    "stack": "TypeScript / Rust"
+  },
+  {
+    "name": "BhumiSetu",
+    "url": "https://github.com/Rhythm-Sanghi/bhumisetu-indore",
+    "category": "Tool",
+    "description": "A map-led workbench for comparing and reviewing Indore reference data.",
+    "stack": "Python / OpenLayers"
+  },
+  {
+    "name": "Serpens",
+    "url": "https://github.com/Rhythm-Sanghi/Serpens",
+    "category": "Game",
+    "description": "Snake, with biome effects, a rewind mechanic, and an autopilot.",
+    "stack": "TypeScript / Capacitor"
+  },
+  {
+    "name": "Flash Speaker",
+    "url": "https://github.com/Rhythm-Sanghi/flash-speaker",
+    "category": "Experiment",
+    "description": "An experiment in synchronized browser audio across nearby devices.",
+    "stack": "JavaScript / WebRTC"
+  }
+]

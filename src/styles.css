@@ -13,7 +13,7 @@
   --ochre: #795f2f;
   --ochre-soft: #e9e2d2;
   --mono: "Cascadia Mono", Consolas, monospace;
-  --rail: 212px;
+  --rail: 220px;
   --header: 66px;
   font-family: "Segoe UI", system-ui, sans-serif;
   color: var(--text);
@@ -120,7 +120,7 @@ main:focus {
 }
 .mono {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.2px;
 }
 .sr-only {
@@ -147,7 +147,7 @@ main:focus {
 .quiet-button {
   background: transparent;
   border-color: transparent;
-  font-size: 12px;
+  font-size: 14px;
   display: inline-flex;
   gap: 8px;
   align-items: center;
@@ -169,7 +169,7 @@ main:focus {
 }
 .eyebrow {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 1.1px;
   text-transform: uppercase;
   display: flex;
@@ -214,7 +214,7 @@ main:focus {
 }
 .header-path {
   color: var(--secondary);
-  font: 11px var(--mono);
+  font: 13px var(--mono);
   border-left: 1px solid var(--border);
   padding-left: 25px;
 }
@@ -225,7 +225,7 @@ main:focus {
   gap: 22px;
 }
 .header-github {
-  font-size: 12px;
+  font-size: 14px;
 }
 .header-github span {
   margin-left: 15px;
@@ -256,13 +256,13 @@ main:focus {
   display: flex;
   align-items: center;
   gap: 14px;
-  font-size: 12px;
+  font-size: 14px;
   padding: 10px 11px;
   border-left: 2px solid transparent;
   white-space: nowrap;
 }
 .section-nav a > span {
-  font: 10px var(--mono);
+  font: 12px var(--mono);
   color: var(--secondary);
 }
 .section-nav a:hover {
@@ -289,7 +289,7 @@ main:focus {
   color: var(--green);
 }
 .rail-bottom p {
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.7;
   margin-bottom: 15px;
 }
@@ -369,7 +369,7 @@ h1 span {
   display: block;
 }
 .desk-project small {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--secondary);
   display: block;
 }
@@ -382,7 +382,7 @@ h1 span {
   padding: 11px 23px;
   background: var(--muted);
   border-top: 1px solid var(--border);
-  font-size: 10px;
+  font-size: 12px;
 }
 .content-section {
   border-top: 1px solid var(--border);
@@ -408,11 +408,11 @@ h1 span {
 }
 .section-aside {
   color: var(--secondary);
-  font-size: 11px;
+  font-size: 13px;
 }
 .featured-project {
   display: grid;
-  grid-template-columns: 0.85fr 1.3fr;
+  grid-template-columns: 1fr 1.3fr;
   gap: 0 34px;
   align-items: center;
   padding: 18px 0 0;
@@ -438,7 +438,7 @@ h1 span {
   padding-left: 42px;
   margin-top: -4px;
   color: var(--secondary);
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 0.8px;
 }
 .project-deck {
@@ -450,7 +450,7 @@ h1 span {
   margin-bottom: 15px;
 }
 .project-story > p:not(.project-deck) {
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.85;
   max-width: 360px;
 }
@@ -461,7 +461,7 @@ h1 span {
   margin: 23px 0;
 }
 .project-links > a:not(.button) {
-  font-size: 12px;
+  font-size: 14px;
 }
 .button {
   display: inline-flex;
@@ -471,7 +471,7 @@ h1 span {
   border: 1px solid transparent;
   border-radius: 4px;
   padding: 9px 13px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
 }
 .button-green {
@@ -493,7 +493,7 @@ h1 span {
 .project-facts {
   display: grid;
   gap: 3px;
-  font-size: 10px;
+  font-size: 12px;
 }
 .project-facts > div {
   display: flex;
@@ -506,7 +506,7 @@ h1 span {
 .project-facts dd {
   font-family: var(--mono);
   margin: 0;
-  font-size: 10px;
+  font-size: 12px;
 }
 .project-figure {
   min-width: 0;
@@ -540,11 +540,11 @@ figcaption {
   gap: 8px;
   padding: 16px 0 13px;
   color: var(--secondary);
-  font-size: 9px;
+  font-size: 12px;
   flex-wrap: wrap;
 }
 figcaption .mono {
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.3px;
 }
 .project-detail {
@@ -552,7 +552,7 @@ figcaption .mono {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   margin-top: 26px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .project-detail summary {
   list-style: none;
@@ -595,39 +595,6 @@ figcaption .mono {
   text-decoration: underline;
   text-underline-offset: 4px;
 }
-.project-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: -9px 0 17px;
-  gap: 18px;
-}
-.project-toolbar > p {
-  font-size: 12px;
-}
-.project-filters {
-  display: flex;
-  gap: 2px;
-  border: 1px solid var(--border);
-  padding: 3px;
-  border-radius: 4px;
-}
-.project-filters button {
-  font-size: 11px;
-  min-height: 30px;
-  padding: 4px 11px;
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 2px;
-}
-.project-filters button:hover {
-  background: var(--muted);
-}
-.project-filters [aria-pressed="true"] {
-  background: var(--surface);
-  border-color: var(--border);
-  color: var(--green);
-}
 .project-row {
   display: grid;
   grid-template-columns: 28px minmax(0, 1fr) auto 20px;
@@ -644,7 +611,7 @@ figcaption .mono {
   background: var(--surface);
 }
 .row-index {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--secondary);
   align-self: start;
   margin-top: 4px;
@@ -655,10 +622,10 @@ figcaption .mono {
   margin-bottom: 3px;
 }
 .project-row p {
-  font-size: 12px;
+  font-size: 14px;
 }
 .row-tech {
-  font-size: 9px;
+  font-size: 12px;
   color: var(--secondary);
 }
 .row-arrow {
@@ -666,7 +633,7 @@ figcaption .mono {
 }
 .section-intro {
   max-width: 540px;
-  font-size: 13px;
+  font-size: 15px;
   margin-top: -14px;
   margin-bottom: 30px;
 }
@@ -687,7 +654,7 @@ figcaption .mono {
 }
 .note-label {
   color: var(--green);
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 0.5px;
   margin-bottom: 22px;
 }
@@ -700,13 +667,13 @@ figcaption .mono {
   margin-bottom: 14px;
 }
 .build-note p {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.8;
   margin-bottom: 25px;
 }
 .note-link {
   margin-top: auto;
-  font-size: 11px;
+  font-size: 13px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -727,14 +694,14 @@ figcaption .mono {
   margin-bottom: 22px;
 }
 .about-copy > p:not(.about-lead) {
-  font-size: 13px;
+  font-size: 15px;
   margin-bottom: 15px;
   max-width: 440px;
   line-height: 1.85;
 }
 .about-copy .text-link {
   margin-top: 12px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .education > .eyebrow {
   margin-bottom: 18px;
@@ -744,16 +711,16 @@ figcaption .mono {
   border-top: 1px solid var(--border);
 }
 .education span {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--green);
 }
 .education h3 {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
   margin: 4px 0;
 }
 .education p {
-  font-size: 11px;
+  font-size: 13px;
 }
 .contact-section {
   padding-top: 34px;
@@ -779,7 +746,7 @@ figcaption .mono {
   margin-bottom: 22px;
 }
 .contact-grid p {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.9;
 }
 .contact-links {
@@ -798,14 +765,14 @@ figcaption .mono {
   margin: 10px 0 0 -10px;
 }
 .contact-links .copy-status {
-  font-size: 11px;
+  font-size: 13px;
   min-height: 21px;
   color: var(--green);
 }
 .social-links {
   display: flex;
   gap: 25px;
-  font-size: 11px;
+  font-size: 13px;
   margin-top: 22px;
 }
 .site-footer {
@@ -814,11 +781,11 @@ figcaption .mono {
   gap: 25px;
   padding: 21px 0;
   border-top: 1px solid var(--border);
-  font-size: 10px;
+  font-size: 12px;
   color: var(--secondary);
 }
 .site-footer .mono {
-  font-size: 9px;
+  font-size: 12px;
 }
 @media (min-width: 1700px) {
   main {
@@ -836,7 +803,7 @@ figcaption .mono {
 }
 @media (max-width: 1150px) {
   :root {
-    --rail: 180px;
+    --rail: 205px;
   }
   .site-header {
     padding-inline: 19px;
@@ -849,7 +816,7 @@ figcaption .mono {
     padding-inline: 10px;
   }
   .section-nav a {
-    font-size: 11px;
+    font-size: 13px;
     gap: 10px;
   }
   .intro {
@@ -871,7 +838,7 @@ figcaption .mono {
     gap: 23px;
   }
   .project-story {
-    display: grid;
+    display: block;
     grid-template-columns: 1fr 1fr;
     gap: 0 30px;
   }
@@ -964,28 +931,26 @@ figcaption .mono {
     border-right: 0;
     border-bottom: 1px solid var(--border);
     z-index: 15;
-    overflow: auto;
-    scrollbar-width: none;
-  }
-  .rail::-webkit-scrollbar {
-    display: none;
+    overflow: visible;
   }
   .rail-label,
   .rail-bottom {
     display: none;
   }
   .section-nav {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 0;
-    padding: 0 12px;
-    width: max-content;
+    padding: 0 6px;
+    width: 100%;
     min-width: 100%;
   }
   .section-nav a {
     border-left: 0;
     border-bottom: 2px solid transparent;
-    padding: 12px 10px;
-    font-size: 10px;
+    padding: 12px 4px;
+    justify-content: center;
+    font-size: 12px;
     gap: 7px;
     min-height: 45px;
   }
@@ -994,7 +959,7 @@ figcaption .mono {
     background: transparent;
   }
   .section-nav a > span {
-    font-size: 9px;
+    display: none;
   }
   main {
     padding-inline: 24px;
@@ -1010,16 +975,16 @@ figcaption .mono {
     letter-spacing: -4px;
   }
   .intro .eyebrow {
-    font-size: 9px;
+    font-size: 12px;
     letter-spacing: 0.4px;
     margin-bottom: 25px;
   }
   .intro-copy {
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1.8;
   }
   .intro .text-link {
-    font-size: 12px;
+    font-size: 14px;
     gap: 15px;
   }
   .desk-note {
@@ -1036,31 +1001,31 @@ figcaption .mono {
     width: 20px;
   }
   .desk-project small {
-    font-size: 9px;
-  }
-  .desk-project strong {
     font-size: 12px;
   }
+  .desk-project strong {
+    font-size: 14px;
+  }
   .note-header {
-    font-size: 9px;
+    font-size: 12px;
   }
   .desk-foot {
     margin-inline: -15px;
     padding-inline: 15px;
-    font-size: 9px;
+    font-size: 12px;
   }
   .section-heading h2 {
     font-size: 17px;
   }
   .section-number {
     margin-right: 10px;
-    font-size: 10px;
+    font-size: 12px;
   }
   .section-heading {
     margin-bottom: 28px;
   }
   .section-aside {
-    font-size: 9px;
+    font-size: 12px;
   }
   .content-section {
     scroll-margin-top: 65px;
@@ -1073,21 +1038,21 @@ figcaption .mono {
     padding-top: 0;
   }
   .project-story > p:not(.project-deck) {
-    font-size: 12px;
+    font-size: 14px;
   }
   .project-links {
     margin: 17px 0;
   }
   .project-links .button {
-    font-size: 11px;
+    font-size: 13px;
     padding: 9px 11px;
     gap: 11px;
   }
   .project-facts {
-    font-size: 9px;
+    font-size: 12px;
   }
   .project-facts dd {
-    font-size: 9px;
+    font-size: 12px;
   }
   .project-figure {
     padding: 22px 20px 0;
@@ -1098,16 +1063,11 @@ figcaption .mono {
   .project-detail div > a {
     grid-column: 1;
   }
-  .project-toolbar {
-    align-items: start;
-    flex-direction: column;
-    gap: 12px;
-  }
   .project-row {
     padding-block: 18px;
   }
   .project-row p {
-    font-size: 11px;
+    font-size: 13px;
   }
   .notes-grid {
     grid-template-columns: 1fr;
@@ -1202,7 +1162,7 @@ figcaption .mono {
     padding: 12px 0;
   }
   .desk-project small {
-    font-size: 11px;
+    font-size: 13px;
   }
   .desk-project strong {
     font-size: 14px;
@@ -1220,7 +1180,7 @@ figcaption .mono {
     margin-bottom: 15px;
   }
   .project-story > p:not(.project-deck) {
-    font-size: 13px;
+    font-size: 15px;
     max-width: 100%;
   }
   .project-links {
@@ -1233,14 +1193,14 @@ figcaption .mono {
     padding: 18px 12px 0;
   }
   .project-kind {
-    font-size: 9px;
+    font-size: 12px;
   }
   .featured-project + .featured-project {
     margin-top: 31px;
     padding-top: 31px;
   }
   figcaption {
-    font-size: 8px;
+    font-size: 11px;
     gap: 4px;
     flex-direction: column;
   }
@@ -1255,13 +1215,13 @@ figcaption .mono {
     gap: 5px;
   }
   .header-github {
-    font-size: 11px;
+    font-size: 13px;
   }
   .header-github span {
     margin-left: 5px;
   }
   .quiet-button {
-    font-size: 11px;
+    font-size: 13px;
     padding-inline: 8px;
   }
   .project-row {

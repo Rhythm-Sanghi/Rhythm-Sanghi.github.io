@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f4f1" />
+    <meta
+      name="description"
+      content="A local code explorer: shared Rust analysis, evidence-backed relationships, and the cost of incremental indexing."
+    />
+    <title>Threadmark — Rhythm Sanghi</title>
+    <link
+      rel="canonical"
+      href="https://rhythm-sanghi.github.io/work/threadmark/"
+    />
+    <meta property="og:title" content="Threadmark — Rhythm Sanghi" />
+    <meta
+      property="og:description"
+      content="A local code explorer: shared Rust analysis, evidence-backed relationships, and the cost of incremental indexing."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://rhythm-sanghi.github.io/work/threadmark/"
+    />
+    <meta
+      property="og:image"
+      content="https://rhythm-sanghi.github.io/assets/social.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Rhythm Sanghi — desktop tools, experiments, and notes"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/assets/mark.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/touch-icon.png" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <link rel="stylesheet" href="/src/pages.css" />
+    <script src="/src/theme.js"></script>
+    <script type="module" src="/src/app.js"></script>
+    <script type="module" src="/src/examples.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="identity" href="/" aria-label="Rhythm Sanghi, home"
+        ><svg class="personal-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M7 25V7h8a6 6 0 0 1 0 12H7m8 0 10 6M19 7h6" /></svg
+        ><span>Rhythm Sanghi</span></a
+      >
+      <span class="header-path">personal / portfolio</span>
+      <div class="header-actions">
+        <button
+          id="theme-toggle"
+          class="quiet-button"
+          hidden
+          aria-label="Switch to dark theme"
+        >
+          <span aria-hidden="true">◐</span
+          ><span id="theme-label">Dark</span></button
+        ><a class="header-github" href="/#contact"
+          >Contact <span aria-hidden="true">↗</span></a
+        >
+      </div>
+    </header>
+    <main id="main" class="document-page case-study" tabindex="-1">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Portfolio</a><span aria-hidden="true">/</span
+        ><span>Threadmark</span>
+      </nav>
+      <nav class="page-index" aria-label="On this page">
+        <a href="#problem">Problem</a><a href="#workflow">Walkthrough</a
+        ><a href="#example">Example</a><a href="#decisions">Decisions</a
+        ><a href="#results">Measurements</a><a href="#limits">Limits</a>
+      </nav>
+      <header class="document-hero">
+        <p class="eyebrow">Selected work / Code explorer</p>
+        <h1>Threadmark</h1>
+        <p class="document-deck">
+          A map is useful when you can check where each edge came from.
+        </p>
+        <p class="document-intro">
+          Threadmark helps me follow dependencies through unfamiliar JavaScript,
+          TypeScript and Python repositories. The Windows app and CLI share a
+          Rust engine; source code stays on the machine.
+        </p>
+        <div class="project-links">
+          <a
+            class="button button-green"
+            href="https://github.com/Rhythm-Sanghi/Threadmark/releases"
+            >Download for Windows ↗</a
+          ><a href="https://github.com/Rhythm-Sanghi/Threadmark"
+            >View source ↗</a
+          >
+        </div>
+        <dl class="case-facts">
+          <div>
+            <dt>Project</dt>
+            <dd>Personal software project</dd>
+          </div>
+          <div>
+            <dt>Stack</dt>
+            <dd>Rust, Tauri, React, SQLite, Tree-sitter</dd>
+          </div>
+          <div>
+            <dt>Stage</dt>
+            <dd>Early release candidate · v0.1.1</dd>
+          </div>
+          <div>
+            <dt>Release</dt>
+            <dd><time datetime="2026-10-09">9 October 2026</time></dd>
+          </div>
+        </dl>
+        <p class="release-note">
+          Windows builds are unsigned.
+          <a
+            href="https://github.com/Rhythm-Sanghi/Threadmark/blob/1ff28c900bd875c90a42183feac43ff2d4f2dc54/docs/release.md"
+            >Read installation notes and limits ↗</a
+          >
+        </p>
+      </header>
+      <section id="problem" class="prose">
+        <h2>The question behind the interface</h2>
+        <p>
+          Searching a name gives me occurrences. It does not tell me whether one
+          function calls another, which relationship was resolved, or what an
+          edit might reach. Threadmark brings those questions into one view,
+          then lets me open the source behind an answer.
+        </p>
+        <p>
+          The project includes the analysis engine, local persistence, CLI and
+          desktop interface. The useful boundary is between understanding code
+          and presenting it: the interface should ask for a neighbourhood, not
+          become a second analysis engine.
+        </p>
+      </section>
+      <section id="workflow">
+        <div class="walkthrough">
+          <p class="eyebrow">Interface walkthrough</p>
+          <p>
+            Open a step to inspect the capture. Each image can be opened at full
+            size.
+          </p>
+          <details class="walkthrough-step" open>
+            <summary>
+              <span class="mono">01</span> Follow a relationship<span
+                aria-hidden="true"
+                >+</span
+              >
+            </summary>
+            <div>
+              <p>
+                The repository tree, directed relationship map and inspector
+                share the selected symbol.
+              </p>
+              <figure class="capture-zoom">
+                <a
+                  href="/assets/threadmark-map.webp"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Open Threadmark follow a relationship screenshot in a new tab"
+                  ><img
+                    src="/assets/threadmark-map.webp"
+                    width="1600"
+                    height="1000"
+                    loading="lazy"
+                    alt="The repository tree, directed relationship map and inspector share the selected symbol."
+                /></a>
+                <figcaption>
+                  Threadmark · Follow a relationship.
+                  <a
+                    href="/assets/threadmark-map.webp"
+                    target="_blank"
+                    rel="noopener"
+                    >Open full image ↗</a
+                  >
+                </figcaption>
+                <button class="focus-toggle" aria-pressed="false" hidden>
+                  Focus on the right-hand detail
+                </button>
+              </figure>
+            </div>
+          </details>
+          <details class="walkthrough-step">
+            <summary>
+              <span class="mono">02</span> Inspect the evidence<span
+                aria-hidden="true"
+                >+</span
+              >
+            </summary>
+            <div>
+              <p>
+                The source inspector places relationship evidence beside the
+                code it came from.
+              </p>
+              <figure class="capture-zoom">
+                <a
+                  href="/assets/threadmark-evidence-dark.png"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Open Threadmark inspect the evidence screenshot in a new tab"
+                  ><img
+                    src="/assets/threadmark-evidence-dark.png"
+                    width="2880"
+                    height="1800"
+                    loading="lazy"
+                    alt="The source inspector places relationship evidence beside the code it came from."
+                /></a>
+                <figcaption>
+                  Threadmark · Inspect the evidence.
+                  <a
+                    href="/assets/threadmark-evidence-dark.png"
+                    target="_blank"
+                    rel="noopener"
+                    >Open full image ↗</a
+                  >
+                </figcaption>
+                <button class="focus-toggle" aria-pressed="false" hidden>
+                  Focus on the right-hand detail
+                </button>
+              </figure>
+            </div>
+          </details>
+          <details class="walkthrough-step">
+            <summary>
+              <span class="mono">03</span> Compare a change<span
+                aria-hidden="true"
+                >+</span
+              >
+            </summary>
+            <div>
+              <p>
+                The Changes view separates added, removed and modified symbols
+                in a local Git comparison.
+              </p>
+              <figure class="capture-zoom">
+                <a
+                  href="/assets/threadmark-changes-dark.png"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Open Threadmark compare a change screenshot in a new tab"
+                  ><img
+                    src="/assets/threadmark-changes-dark.png"
+                    width="2880"
+                    height="1800"
+                    loading="lazy"
+                    alt="The Changes view separates added, removed and modified symbols in a local Git comparison."
+                /></a>
+                <figcaption>
+                  Threadmark · Compare a change.
+                  <a
+                    href="/assets/threadmark-changes-dark.png"
+                    target="_blank"
+                    rel="noopener"
+                    >Open full image ↗</a
+                  >
+                </figcaption>
+                <button class="focus-toggle" aria-pressed="false" hidden>
+                  Focus on the right-hand detail
+                </button>
+              </figure>
+            </div>
+          </details>
+        </div>
+        <p class="capture-note">
+          These Threadmark captures render the frontend with responses recorded
+          from its Rust engine against local example repositories. They show the
+          interface, not a native session recording.
+          <a
+            href="https://github.com/Rhythm-Sanghi/Threadmark/blob/1ff28c900bd875c90a42183feac43ff2d4f2dc54/docs/screenshots/README.md"
+            >Capture details ↗</a
+          >
+        </p>
+      </section>
+      <section id="example" class="demo-panel" data-demo="threadmark">
+        <p class="eyebrow">Try a small example</p>
+        <h2>Which code depends on this?</h2>
+        <p>
+          This hand-written sample explains directed relationships. It does not
+          run Threadmark or analyse your files.
+        </p>
+        <div class="demo-layout">
+          <div>
+            <pre><code>function readConfig() { return { limit: 10 }; }
+function loadItems() { return readConfig().limit; }
+function renderList() { return loadItems(); }
+function exportItems() { return loadItems(); }</code></pre>
+            <div
+              class="demo-nodes"
+              hidden
+              role="group"
+              aria-label="Select a sample symbol"
+            >
+              <button data-symbol="readConfig" aria-pressed="true">
+                readConfig</button
+              ><button data-symbol="loadItems" aria-pressed="false">
+                loadItems</button
+              ><button data-symbol="renderList" aria-pressed="false">
+                renderList</button
+              ><button data-symbol="exportItems" aria-pressed="false">
+                exportItems
+              </button>
+            </div>
+          </div>
+          <div class="demo-result" role="status" aria-live="polite">
+            <h3 id="symbol-name">readConfig</h3>
+            <p id="symbol-dependencies">
+              Direct dependencies: none in this sample.
+            </p>
+            <p id="symbol-impact">
+              Reverse reachability: loadItems, renderList, exportItems.
+            </p>
+            <p class="annotation">
+              A path through a static graph is a reason to investigate. It does
+              not prove that every caller will run.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="decisions" class="prose">
+        <h2>Two boundaries worth keeping</h2>
+        <h3>One engine for two clients</h3>
+        <p>
+          Rust owns discovery, Tree-sitter adapters, resolution, graph queries
+          and Git comparison. React owns interaction and layout. Both the
+          desktop app and CLI call the same engine. This keeps a relationship's
+          meaning consistent whichever way I inspect it.
+        </p>
+        <p>
+          The desktop requests up to 24 nodes in a neighbourhood. The engine
+          marks limits explicitly, so a bounded view cannot silently imply that
+          no other dependencies exist.
+        </p>
+        <h3>Identity is separate from location</h3>
+        <p>
+          Symbol IDs use repository, path, language, qualified name and kind.
+          Line numbers are excluded. Adding blank lines should move the source
+          span without making every symbol look newly added. Renaming a file
+          still changes identity and currently appears as additions and
+          removals.
+        </p>
+        <p>
+          <a
+            href="https://github.com/Rhythm-Sanghi/Threadmark/blob/1ff28c900bd875c90a42183feac43ff2d4f2dc54/docs/architecture.md"
+            >Architecture and decisions ↗</a
+          >
+          ·
+          <a href="/notes/relationships/"
+            >Why evidence belongs beside an edge →</a
+          >
+        </p>
+      </section>
+      <section id="results">
+        <h2>A cache hit does not make the work free</h2>
+        <p class="section-intro">
+          Version 0.1.1, measured on 7 October 2026. Generated TypeScript
+          fixtures, ten functions per file, single run.
+        </p>
+        <div
+          class="table-scroll"
+          role="region"
+          aria-label="Threadmark benchmark results"
+          tabindex="0"
+        >
+          <table>
+            <caption>
+              Documented engine measurements, not desktop latency promises
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Files / functions</th>
+                <th scope="col">New index</th>
+                <th scope="col">Unchanged refresh</th>
+                <th scope="col">One-file update</th>
+                <th scope="col">Peak working set</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">100 / 1,000</th>
+                <td>102 ms</td>
+                <td>48 ms</td>
+                <td>60 ms</td>
+                <td>21 MiB</td>
+              </tr>
+              <tr>
+                <th scope="row">1,000 / 10,000</th>
+                <td>673 ms</td>
+                <td>307 ms</td>
+                <td>383 ms</td>
+                <td>86 MiB</td>
+              </tr>
+              <tr>
+                <th scope="row">10,000 / 100,000</th>
+                <td>7.40 s</td>
+                <td>3.52 s</td>
+                <td>4.60 s</td>
+                <td>731 MiB</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="measurement-context">
+          <h3>Conditions matter</h3>
+          <p>
+            Windows 11 x64 · Intel Core i7-1365U · 16 GB RAM · Rust 1.98.1
+            release build. No concurrent build. OS filesystem caches were not
+            flushed: “new index” means a new database and parse cache, not a
+            physically cold disk.
+          </p>
+          <p>
+            Whole-graph resolution and snapshot persistence still run during a
+            refresh. Reusing parses helps, but does not remove those costs. The
+            first adjacency load and broad real-world graphs add work not
+            captured by a small warm query.
+          </p>
+          <p>
+            <a
+              href="https://github.com/Rhythm-Sanghi/Threadmark/blob/1ff28c900bd875c90a42183feac43ff2d4f2dc54/docs/performance.md"
+              >Method, reproduction command and raw results ↗</a
+            >
+            ·
+            <a href="/notes/measuring-refresh/">Read the performance note →</a>
+          </p>
+        </div>
+      </section>
+      <section id="limits" class="prose">
+        <h2>Where the answers stop</h2>
+        <p>
+          Static evidence cannot resolve arbitrary runtime dispatch, reflection
+          or computed imports. Reverse impact is graph reachability, not a
+          prediction of execution or test coverage. Git renames are not yet
+          tracked as continuous identities.
+        </p>
+        <p>
+          The next useful improvements are affected-subgraph resolution and more
+          efficient persistence, followed by broader desktop and long-session
+          measurements. Linux and macOS have not been validated.
+        </p>
+        <a class="text-link" href="/work/benchlight/">Next: Benchlight →</a>
+      </section>
+
+      <footer class="document-footer">
+        <a href="/#work">← Selected work</a
+        ><a href="/#contact">Get in touch ↗</a
+        ><span>© <span id="year">2026</span> Rhythm Sanghi</span>
+      </footer>
+    </main>
+  </body>
+</html>
