@@ -712,3 +712,40 @@ th {
     margin: 16mm;
   }
 }
+.native-demo {
+  margin: 0 0 2rem;
+}
+.native-demo video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 75vh;
+  background: #121311;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.native-demo figcaption {
+  display: block;
+  margin-top: .75rem;
+  font-size: .875rem;
+  line-height: 1.65;
+}
+.native-demo figcaption a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.demo-transcript {
+  margin: 1rem 0 2rem;
+}
+.demo-transcript summary {
+  cursor: pointer;
+  min-height: 44px;
+  display: list-item;
+  padding: .65rem 0;
+}
+@media print {
+  .native-demo video { display: none; }
+}

@@ -44,6 +44,10 @@ async function get(name) {
         "assets/rhythm-sanghi-profile.pdf",
         "assets/threadmark-map.webp",
         "assets/benchlight-space.webp",
+        "assets/threadmark-demo.mp4",
+        "assets/benchlight-demo.mp4",
+        "assets/threadmark-demo.vtt",
+        "assets/benchlight-demo.vtt",
       ]) {
         const response = await get(file);
         if (!(await response.arrayBuffer()).byteLength)

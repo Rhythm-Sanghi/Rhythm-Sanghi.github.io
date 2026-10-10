@@ -12,6 +12,8 @@ const mime = {
   ".webp": "image/webp",
   ".png": "image/png",
   ".pdf": "application/pdf",
+  ".mp4": "video/mp4",
+  ".vtt": "text/vtt; charset=utf-8",
   ".txt": "text/plain; charset=utf-8",
   ".xml": "application/xml; charset=utf-8",
   ".json": "application/json; charset=utf-8",
@@ -48,10 +50,31 @@ http
         return;
       }
       const data = await fs.readFile(file);
+      if (request.headers.range && path.extname(file) === ".mp4") {
+        const match = /^bytes=(\d*)-(\d*)$/.exec(request.headers.range);
+        const suffix = match && !match[1];
+        const start = suffix ? Math.max(0, data.length - Number(match[2])) : Number(match?.[1]);
+        const end = suffix || !match?.[2] ? data.length - 1 : Math.min(Number(match[2]), data.length - 1);
+        if (!match || !Number.isInteger(start) || start > end || start >= data.length) {
+          response.writeHead(416, { "Content-Range": `bytes */${data.length}` });
+          response.end();
+          return;
+        }
+        response.writeHead(206, {
+          "Content-Type": mime[".mp4"],
+          "Content-Range": `bytes ${start}-${end}/${data.length}`,
+          "Content-Length": end - start + 1,
+          "Accept-Ranges": "bytes",
+        });
+        response.end(request.method === "HEAD" ? undefined : data.subarray(start, end + 1));
+        return;
+      }
       response.writeHead(200, {
         "Content-Type": mime[path.extname(file)],
         "Cache-Control": "no-cache",
         "X-Content-Type-Options": "nosniff",
+        "Content-Length": data.length,
+        "Accept-Ranges": "bytes",
       });
       response.end(request.method === "HEAD" ? undefined : data);
     } catch {

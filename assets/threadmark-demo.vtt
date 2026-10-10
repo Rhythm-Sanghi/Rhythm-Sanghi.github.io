@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00.000 --> 00:10.000
+The native Threadmark app shows forecast.ts and its imports and exports.
+
+00:10.000 --> 00:28.000
+Selecting an import reveals its exact source line and TypeScript adapter evidence.
+
+00:28.000 --> 00:36.000
+The Impact view lists code reachable through reverse static relationships.
+
+00:36.000 --> 00:45.000
+Expanding an evidence path reveals the import behind the relationship.

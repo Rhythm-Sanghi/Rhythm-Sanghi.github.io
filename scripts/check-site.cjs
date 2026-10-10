@@ -53,7 +53,7 @@ for (const name of pages) {
 const referencedAssets = new Set();
 for (const name of pages) {
   const html = fs.readFileSync(path.join(root, name), "utf8");
-  for (const match of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
+  for (const match of html.matchAll(/\b(?:href|src|poster)="([^"]+)"/g)) {
     const ref = match[1];
     if (/^(?:https?:|mailto:|data:)/.test(ref)) continue;
     const url = new URL(

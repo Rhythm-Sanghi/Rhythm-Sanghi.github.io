@@ -137,6 +137,25 @@
         </p>
       </section>
       <section id="workflow">
+        <figure class="native-demo" aria-labelledby="benchlight-demo-caption">
+          <p class="eyebrow">Watch the desktop app · 45 seconds</p>
+          <video controls playsinline preload="none" width="1378" height="964"
+            poster="/assets/benchlight-demo.webp" aria-label="Benchlight native Windows walkthrough"
+            aria-describedby="benchlight-demo-caption">
+            <source src="/assets/benchlight-demo.mp4" type="video/mp4" />
+            <track kind="captions" src="/assets/benchlight-demo.vtt" srclang="en" label="English visual guide" default />
+            <p><a href="/assets/benchlight-demo.mp4">Download the Benchlight walkthrough</a>.</p>
+          </video>
+          <figcaption id="benchlight-demo-caption">Benchlight 0.1.0, recorded in the native Windows app on 10 October 2026 using a disposable fixture workspace. Silent, real-time capture; no cursor overlay.
+            <a href="/assets/benchlight-demo.mp4" download>Download MP4</a> · <a href="#demo-transcript">Read transcript</a>
+          </figcaption>
+        </figure>
+        <details class="demo-transcript" id="demo-transcript">
+          <summary>Video transcript and setup</summary>
+          <p>Start a scan of the selected fixture workspace. The completed scan reports six projects, 26 MiB of logical file sizes and zero errors. Open Space to see Node dependencies marked Review and an unclassified environment marked Protected. Open Projects to inspect the detected stacks and measured sizes. No cleanup is performed.</p>
+          <p>The workspace copies the project’s test fixtures and adds generated sample files. Its sizes illustrate the workflow; they are not a performance benchmark or your real storage usage.</p>
+        </details>
+
         <div class="walkthrough">
           <p class="eyebrow">Interface walkthrough</p>
           <p>

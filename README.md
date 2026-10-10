@@ -51,7 +51,9 @@ npm run check-links
 
 A custom domain is optional. If one is added, update the canonical/structured-data/sharing URLs, sitemap and verification URL together, and set up DNS/HTTPS before adding `CNAME`.
 
-## Images, measurements and license
+## Recordings, images, measurements and license
+
+The case studies include 45-second native Windows recordings captured on 10 October 2026, with cursor overlays excluded. Threadmark uses the public `forecast-service` sample; Benchlight scans a disposable copy of its test fixtures with generated sample files. These are real-time silent workflows, not performance benchmarks. Each video has controls, a poster, English visual captions and a written transcript; it loads only when played. Keep the MP4, poster and VTT files in `assets/` together when updating a recording.
 
 Threadmark and Benchlight logos and screenshots come from their respective repositories. Threadmark captures render its UI using responses recorded from its Rust engine; Benchlight captures show a local Windows scan. The case studies link to the original capture notes and measurements at the recorded source revisions. Numbers are documented development measurements with their conditions and limits, not fresh benchmarks or general guarantees.
 
