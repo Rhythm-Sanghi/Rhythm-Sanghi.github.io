@@ -23,6 +23,7 @@ Open http://127.0.0.1:8089. Set `PORT` for a different port. The server serves p
 - `profile/index.html`: printable profile. `assets/rhythm-sanghi-profile.pdf` is the corresponding one-page download; update both together when facts change.
 - `src/styles.css` and `src/pages.css`: home layout, shared page styles, responsive rules and print presentation.
 - `src/app.js`, `src/theme.js`, `src/examples.js`: theme, navigation, email copy, screenshot focus and sample interactions.
+- `content/social/`: editable vector layouts for the project sharing cards; the exported PNGs are in `assets/`.
 - `content/sources.json`: project-documentation revisions used for the case studies and measurements.
 
 After editing public content:
